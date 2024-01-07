@@ -6,6 +6,7 @@ export default function Home() {
       <Navbar />
       <div style={{ maxWidth: 1440, marginLeft: "auto", marginRight: "auto" }}>
         <ProductHero />
+        <Footer />
       </div>
     </main>
   );
