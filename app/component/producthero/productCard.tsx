@@ -4,12 +4,15 @@ import Image from 'next/image';
 import { Product } from '../../lib/producthero/constants';
 type Props = {
   selectedProductDetails?: Product;
-  selectedSmallImageId: number;
+  selectedSmallImageId: string;
 };
 export default function ProductCard({
   selectedProductDetails,
   selectedSmallImageId,
 }: Props) {
+  const selectedProductImage = selectedProductDetails?.thumbnailImages.find(
+    (i) => i.id === selectedSmallImageId,
+  );
   return (
     <Stack
       sx={{
@@ -24,11 +27,11 @@ export default function ProductCard({
         bottom: ' 10px',
       }}
     >
-      {selectedProductDetails && (
+      {selectedProductDetails && selectedProductImage && (
         <Image
-          key={selectedProductDetails.thumbnailImages[selectedSmallImageId]}
-          src={selectedProductDetails.thumbnailImages[selectedSmallImageId]}
-          alt={selectedProductDetails.thumbnailImages[selectedSmallImageId]}
+          key={selectedProductImage?.id}
+          src={selectedProductImage?.src}
+          alt={selectedProductImage?.id}
           width={70}
           height={70}
           style={{

@@ -10,7 +10,7 @@ import ProductSmallImgCard from './productSmallImgCard';
 export default function ProductHero() {
   const [selectedImage, setSelectedImage] = useState(products[0].images[0]);
   const [selectedProductId, setSelectedProductId] = useState(products[0].id);
-  const [selectedSmallImageId, setSelectedSmallImageId] = useState(0);
+  const [selectedSmallImageId, setSelectedSmallImageId] = useState('a1');
   const [selectedGroup, setSelectedGroup] = useState(0);
 
   const [selectedProductDetails, setSelectedProductDetails] = useState<Product>(
@@ -65,7 +65,8 @@ export default function ProductHero() {
                 setSelectedProductId(product.id);
                 selected && setSelectedProductDetails(selected);
                 setSelectedImage(product.images[0]);
-                setSelectedSmallImageId(0);
+                selected &&
+                  setSelectedSmallImageId(selected.thumbnailImages[0].id);
               }}
             >
               {product.name}

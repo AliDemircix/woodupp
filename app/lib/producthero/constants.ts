@@ -1,10 +1,14 @@
+export type Thumbnail = {
+  id: string;
+  src: string;
+};
 export type Product = {
   id: number;
   name: string;
   description: string;
   price: number;
   images: string[];
-  thumbnailImages: string[];
+  thumbnailImages: Thumbnail[];
 };
 export const products: Product[] = [
   {
@@ -21,12 +25,12 @@ export const products: Product[] = [
       '/akupanel-snow-showcase.jpg',
     ],
     thumbnailImages: [
-      '/akupanel-copper-oxide-100x100.jpg.webp',
-      '/akupanel-grey-oxide-100x100.jpg.webp',
-      '/akupanel-oxide-blue-100x100.jpg.webp',
-      '/akupanel-white-oxide-100x100.jpg.webp',
-      '/akupanel-charcoal-100x100.jpg.webp',
-      '/akupanel-snow-100x100.jpg.webp',
+      { id: 'a1', src: '/akupanel-copper-oxide-100x100.jpg.webp' },
+      { id: 'a2', src: '/akupanel-grey-oxide-100x100.jpg.webp' },
+      { id: 'a3', src: '/akupanel-oxide-blue-100x100.jpg.webp' },
+      { id: 'a4', src: '/akupanel-white-oxide-100x100.jpg.webp' },
+      { id: 'a5', src: '/akupanel-charcoal-100x100.jpg.webp' },
+      { id: 'a6', src: '/akupanel-snow-100x100.jpg.webp' },
     ],
   },
   {
@@ -43,12 +47,12 @@ export const products: Product[] = [
       '/Akupanel60-grey-horisontal.png',
     ],
     thumbnailImages: [
-      '/classic-oak-black-felt-front-100x100.jpg',
-      '/classic-oak-black-felt-front-100x100.jpg',
-      '/rustic-natural-oak-front-100x100.jpg',
-      '/walnut-front-100x100.jpg',
-      '/rustic-brown-front-100x100.jpg',
-      '/rustic-grey-oak-front-100x100.jpg',
+      { id: 'b1', src: '/classic-oak-black-felt-front-100x100.jpg' },
+      { id: 'b2', src: '/classic-oak-black-felt-front-100x100.jpg' },
+      { id: 'b3', src: '/rustic-natural-oak-front-100x100.jpg' },
+      { id: 'b4', src: '/walnut-front-100x100.jpg' },
+      { id: 'b5', src: '/rustic-brown-front-100x100.jpg' },
+      { id: 'b6', src: '/rustic-grey-oak-front-100x100.jpg' },
     ],
   },
 ];

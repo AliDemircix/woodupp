@@ -6,8 +6,8 @@ import { Product } from '@/app/lib/producthero/constants';
 type Props = {
   selectedProductDetails?: Product;
   selectedGroup: number;
-  selectedSmallImageId: number;
-  setSelectedSmallImageId: (id: number) => void;
+  selectedSmallImageId: string;
+  setSelectedSmallImageId: (id: string) => void;
   setSelectedImage: (img: string) => void;
   setSelectedGroup: (group: number) => void;
 };
@@ -19,6 +19,7 @@ export default function ProductSmallImgCard({
   setSelectedImage,
   setSelectedGroup,
 }: Props) {
+  console.log(selectedProductDetails?.thumbnailImages);
   return (
     <Stack
       sx={{
@@ -42,20 +43,22 @@ export default function ProductSmallImgCard({
           ) {
             return (
               <Image
-                key={image}
-                src={image}
-                alt={image}
+                key={image.id}
+                src={image.src}
+                alt={image.id}
                 width={60}
                 height={60}
                 style={{
                   borderRadius: '50%',
                   cursor: 'pointer',
                   border:
-                    selectedSmallImageId === i ? 'solid 2px #565656' : 'none',
+                    selectedSmallImageId === image.id
+                      ? 'solid 2px #565656'
+                      : 'none',
                   marginTop: '10px',
                 }}
                 onClick={() => {
-                  setSelectedSmallImageId(i);
+                  setSelectedSmallImageId(image.id);
                   setSelectedImage(selectedProductDetails.images[i]);
                 }}
               />
