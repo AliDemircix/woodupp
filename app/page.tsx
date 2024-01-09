@@ -1,5 +1,5 @@
 import Navbar from './component/navbar';
-import ProductHero from './component/productHero';
+import ProductHero from './component/producthero/productHero';
 export default function Home() {
   return (
     <main>
