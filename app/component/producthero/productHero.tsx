@@ -6,6 +6,7 @@ import { useState } from 'react';
 import ProductCard from './productCard';
 import { Product, products } from '../../lib/producthero/constants';
 import ProductSmallImgCard from './productSmallImgCard';
+import CategoryTabPanel from './categoryTabPanel';
 
 export default function ProductHero() {
   const [selectedImage, setSelectedImage] = useState(products[0].images[0]);
@@ -35,45 +36,13 @@ export default function ProductHero() {
           borderRadius: '24px',
         }}
       />
-      <Stack
-        sx={{
-          backgroundColor: 'hsla(0,0%,100%,.4)',
-          borderRadius: '100px',
-          boxSizing: 'border-box',
-          display: 'inline-flex',
-          padding: '15px 20px',
-          position: 'absolute',
-          top: '50px',
-          left: '20px',
-        }}
-        direction={'row'}
-      >
-        {products.map((product) => {
-          return (
-            <Stack
-              key={product.id}
-              borderRadius="100px"
-              p={2}
-              sx={{
-                backgroundColor:
-                  selectedProductId === product.id ? 'white' : '',
-                cursor: 'pointer',
-                transition: 'all .9s',
-              }}
-              onClick={() => {
-                const selected = products.find((p) => p.id === product.id);
-                setSelectedProductId(product.id);
-                selected && setSelectedProductDetails(selected);
-                setSelectedImage(product.images[0]);
-                selected &&
-                  setSelectedSmallImageId(selected.thumbnailImages[0].id);
-              }}
-            >
-              {product.name}
-            </Stack>
-          );
-        })}
-      </Stack>
+      <CategoryTabPanel
+        selectedProductId={selectedProductId}
+        setSelectedProductId={setSelectedProductId}
+        setSelectedProductDetails={setSelectedProductDetails}
+        setSelectedImage={setSelectedImage}
+        setSelectedSmallImageId={setSelectedSmallImageId}
+      />
       <ProductSmallImgCard
         selectedProductDetails={selectedProductDetails}
         selectedGroup={selectedGroup}

@@ -3,6 +3,8 @@ import { IconButton, Stack } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Image from 'next/image';
 import { Product } from '@/app/lib/producthero/constants';
+import useMediaQuery from '@mui/material/useMediaQuery';
+
 type Props = {
   selectedProductDetails?: Product;
   selectedGroup: number;
@@ -11,6 +13,7 @@ type Props = {
   setSelectedImage: (img: string) => void;
   setSelectedGroup: (group: number) => void;
 };
+
 export default function ProductSmallImgCard({
   selectedProductDetails,
   selectedGroup,
@@ -19,7 +22,8 @@ export default function ProductSmallImgCard({
   setSelectedImage,
   setSelectedGroup,
 }: Props) {
-  console.log(selectedProductDetails?.thumbnailImages);
+  const smallScreen = useMediaQuery('(max-width:700px)');
+
   return (
     <Stack
       sx={{
@@ -30,8 +34,8 @@ export default function ProductSmallImgCard({
         position: 'absolute',
         display: 'flex',
         flexDirection: 'column',
-        right: '50px',
-        top: ' 50px',
+        right: smallScreen ? '10px' : '50px',
+        top: smallScreen ? '150px' : ' 50px',
       }}
     >
       {selectedProductDetails &&
