@@ -20,9 +20,9 @@ const roboto = Roboto({
 // }
 
 export const theme = createTheme({
-  palette: {
-    mode: "light",
-  },
+  // palette: {
+  //   mode: "light",
+  // },
   typography: {
     fontFamily: roboto.style.fontFamily,
   },
