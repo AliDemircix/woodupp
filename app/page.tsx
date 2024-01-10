@@ -1,3 +1,4 @@
+import Footer from "./component/footer/footer";
 import Navbar from "./component/navbar";
 import ProductHero from "./component/producthero/productHero";
 export default function Home() {

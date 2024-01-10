@@ -25,19 +25,53 @@ export const theme = createTheme({
   // },
   typography: {
     fontFamily: roboto.style.fontFamily,
+    fontSize: 14,
+    h1: {
+      fontSize: 60,
+    },
+    h2: {
+      fontSize: 48,
+    },
+    h3: {
+      fontSize: 34,
+    },
+    h4: {
+      fontSize: 24,
+    },
+    h5: {
+      fontSize: 20,
+    },
+    h6: {
+      fontSize: 16,
+    },
+    subtitle1: {
+      fontSize: 14,
+    },
+    subtitle2: {
+      fontSize: 12,
+    },
+    body2: {
+      fontSize: 12,
+    },
+    button: {
+      fontSize: 12,
+    },
+    caption: {
+      fontSize: 10,
+    },
   },
 
-  //   components: {
-  //     MainMenuFrameComponent: {
-  //       styleOverrides: {
-  //         root: {
-  //         //   width: 250,
-  //         //   height: 400,
-  //         //   border: `12px ${Colors.primary}`,
-  //         //   borderStyle: "ridge solid",
-  //         //   borderRadius: "36px",
-  //         // },
-  //       },
-  //     },
-  //   },
+  /*  components: {
+    MainMenuFrameComponent: {
+      styleOverrides: {
+        root: {
+          width: 250,
+          height: 400,
+          border: `12px ${Colors.primary}`,
+          borderStyle: "ridge solid",
+          borderRadius: "36px",
+        },
+      },
+    },
+  }, */
 });
