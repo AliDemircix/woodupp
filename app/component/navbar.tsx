@@ -17,6 +17,11 @@ import Grid from "@mui/material/Grid";
 import { Theme } from "@mui/material/styles";
 import { Dispatch, SetStateAction } from "react";
 import Image from "next/image";
+import { useMediaQuery } from "@mui/material";
+import Accordion from "@mui/material/Accordion";
+import AccordionActions from "@mui/material/AccordionActions";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
 
 const useStyles = makeStyles((theme: Theme) => ({
   menu1buttons: {
@@ -28,6 +33,19 @@ const useStyles = makeStyles((theme: Theme) => ({
     letterSpacing: 0.5,
     fontWeight: 700,
     color: "#000000",
+    "&:hover": { background: "white" },
+  },
+  menu1buttonsMobile: {
+    textTransform: "none",
+    display: "flex",
+    flexDirection: "row-reverse",
+    justifyContent: "space-between",
+    padding: "8px 32px",
+    letterSpacing: 0.5,
+    margin: 0,
+    fontWeight: 700,
+    color: "#000000",
+    "&:hover": { background: "white" },
   },
   vertical: {
     transition: "all 500ms",
@@ -43,7 +61,45 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     flexDirection: "column",
     gap: 8,
-    width: 370,
+    minWidth: 370,
+    margin: 0,
+    "&hover": {
+      cursor: "pointer",
+    },
+  },
+  menu2Mobile: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 8,
+    padding: "0 16px",
+
+    "&hover": {
+      cursor: "pointer",
+    },
+  },
+  menu3: {
+    width: 500,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: 0,
+    cursor: "pointer",
+  },
+  accordion: {
+    border: "none", // Remove the border
+    margin: 0, // Add the margin at the bottom
+    boxShadow: "none", // Remove the box shadow
+    "&:not(:last-child)": {
+      borderBottom: "1px solid rgba(0, 0, 0, 0.12)", // Add border between panels
+    },
+    "&:before": {
+      display: "none", // Hide the default border between panels
+    },
+  },
+  accordionSummary: {
+    marginBottom: -1, // Adjust margin to compensate for border
+    margin: 0,
   },
 }));
 
@@ -62,15 +118,31 @@ export default function Navbar() {
 
   const openOption = Object.keys(isMenu1Open).find((key) => isMenu1Open[key]);
 
-  const [hoveredElementId, setHoveredElementId] = useState<
-    number | undefined | null
-  >(null);
+  const [hoveredElementId, setHoveredElementId] = useState<number | undefined>(
+    undefined
+  );
 
   const handleClose = () => setOpen(false);
-
+  const isBigScreen = useMediaQuery("(min-width: 1500px)");
+  const isMobile = useMediaQuery("(max-width: 900px)");
   return (
-    <Box>
-      <AppBar position="sticky" color={"transparent"}>
+    <Box
+      sx={{
+        boxShadow: "0 4px 2px -2px gray",
+        position: "sticky",
+        top: 0,
+        left: 0,
+      }}
+    >
+      <AppBar
+        position="sticky"
+        color={"transparent"}
+        style={{
+          maxWidth: 1440,
+          margin: "auto",
+          boxShadow: "none",
+        }}
+      >
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <IconButton
             disableRipple
@@ -106,7 +178,7 @@ export default function Navbar() {
             onClose={handleClose}
             style={{
               position: "absolute",
-              top: 64,
+              top: 66,
               left: 0,
               margin: 0,
               padding: 0,
@@ -114,22 +186,57 @@ export default function Navbar() {
             hideBackdrop={true}
             PaperProps={{
               style: {
-                backgroundColor: "transparent",
+                backgroundColor: "white",
                 boxShadow: "none",
               },
             }}
           >
-            <div style={{ display: "flex", padding: 64, gap: "32px" }}>
-              <Menu1 open={isMenu1Open} setIsMenu1Open={setIsMenu1Open} />
-              {openOption && (
-                <Menu2
-                  option={options.find((option) => option.name === openOption)}
+            {isMobile ? (
+              <div>
+                <MenuMobile
                   open={isMenu1Open}
-                  setIsHovered={setHoveredElementId}
+                  setIsMenu1Open={setIsMenu1Open}
                 />
-              )}
-              {hoveredElementId && <Menu3 subMenuId={hoveredElementId} />}
-            </div>
+              </div>
+            ) : (
+              <div
+                style={{
+                  display: "flex",
+                  padding: isBigScreen ? "3rem 0" : 64,
+                  width: "100%",
+                  maxWidth: 1440,
+                  marginTop: 32,
+                  marginLeft: isBigScreen ? "auto" : "0",
+                  marginRight: isBigScreen ? "auto" : "0",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    gap: isBigScreen ? 140 : 64,
+                    minWidth: "100%",
+                  }}
+                >
+                  <Menu1 open={isMenu1Open} setIsMenu1Open={setIsMenu1Open} />
+                  <div style={{ display: "flex", gap: 0 }}>
+                    {openOption && (
+                      <Menu2
+                        option={options.find(
+                          (option) => option.name === openOption
+                        )}
+                        open={isMenu1Open}
+                        setIsHovered={setHoveredElementId}
+                      />
+                    )}
+
+                    <Menu3
+                      subMenuId={hoveredElementId}
+                      setIsHovered={setHoveredElementId}
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
           </Dialog>
           <h2>ECD Wall Panel</h2>
           <IconButton
@@ -149,6 +256,250 @@ export default function Navbar() {
     </Box>
   );
 }
+
+type SubMenu = { name: string; id: number; img: string; text: string };
+type Option = {
+  name: string;
+  id: number;
+  submenus?: { name: string; id: number; img: string }[];
+};
+
+type Menu1Props = {
+  open: Record<string, boolean>;
+  setIsMenu1Open: Dispatch<SetStateAction<Record<string, boolean>>>;
+};
+
+const Menu1 = (props: Menu1Props) => {
+  const { open, setIsMenu1Open } = props;
+  const classes = useStyles();
+  const handleButtonClick = (optionName: string) => {
+    setIsMenu1Open((prevOpen) => ({
+      ...Object.fromEntries(
+        Object.entries(prevOpen).map(([key]) => [key, false])
+      ),
+      [optionName]: !prevOpen[optionName],
+    }));
+  };
+
+  return (
+    <div>
+      {options.map((option) => (
+        <Grid container key={option.id} direction="column" mb={2}>
+          <Button
+            className={classes.menu1buttons}
+            onClick={() => handleButtonClick(option.name)}
+            disableRipple
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width={"40"}
+              height={"40"}
+              viewBox="0 0 160 160"
+              className={classes.vertical}
+            >
+              <rect
+                x="70"
+                width="20"
+                height="160"
+                className={
+                  open[option.name as string]
+                    ? classes.transform
+                    : classes.vertical
+                }
+              />
+              <rect y="70" width="160" height="20" />
+            </svg>
+            <Typography variant={"h4"}>{option.name}</Typography>
+          </Button>
+        </Grid>
+      ))}
+    </div>
+  );
+};
+
+const MenuMobile = (props: Menu1Props) => {
+  const { open, setIsMenu1Open } = props;
+  const classes = useStyles();
+  const handleButtonClick = (optionName: string) => {
+    setIsMenu1Open((prevOpen) => ({
+      ...Object.fromEntries(
+        Object.entries(prevOpen).map(([key]) => [key, false])
+      ),
+      [optionName]: !prevOpen[optionName],
+    }));
+  };
+
+  return (
+    <div>
+      {options.map((option) => (
+        <Accordion className={classes.accordion}>
+          <AccordionSummary
+            aria-controls="panel1-content"
+            id="panel1-header"
+            className={classes.accordionSummary}
+            //classes={{ expanded: classes.accordionSummary }}
+          >
+            <Grid container key={option.id} direction="column">
+              <Button
+                className={classes.menu1buttonsMobile}
+                onClick={() => handleButtonClick(option.name)}
+                disableRipple
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width={"20"}
+                  height={"20"}
+                  viewBox="0 0 160 160"
+                  className={classes.vertical}
+                >
+                  <rect
+                    x="70"
+                    width="20"
+                    height="160"
+                    className={
+                      open[option.name as string]
+                        ? classes.transform
+                        : classes.vertical
+                    }
+                  />
+                  <rect y="70" width="160" height="20" />
+                </svg>
+                <Typography variant={"h5"}>{option.name}</Typography>
+              </Button>
+            </Grid>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Menu2Mobile
+              option={options.find((option) => option.name === option.name)}
+            />
+          </AccordionDetails>
+        </Accordion>
+      ))}
+    </div>
+  );
+};
+
+type Menu2Props = {
+  option: Option | undefined;
+  open: Record<string, boolean>;
+  setIsHovered: Dispatch<SetStateAction<number | undefined>>;
+};
+
+type Menu2MobileProps = {
+  option: Option | undefined;
+};
+
+const Menu2 = (props: Menu2Props) => {
+  const classes = useStyles();
+  const { option, open, setIsHovered } = props;
+
+  const handleMouseEnter = (elementId: number | undefined) => {
+    setIsHovered(elementId);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(undefined);
+  };
+
+  return (
+    <div className={classes.menu2}>
+      {option?.submenus?.map((submenu) => (
+        <div
+          key={submenu.id}
+          onMouseEnter={() => handleMouseEnter(submenu.id)}
+          onMouseLeave={handleMouseLeave}
+        >
+          <Button className={classes.menu1buttons}>
+            <Typography
+              variant="h6"
+              fontWeight={400}
+              noWrap
+              style={{ overflow: "hidden", textOverflow: "ellipsis" }}
+            >
+              {submenu.name}
+            </Typography>
+          </Button>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+const Menu2Mobile = (props: Menu2MobileProps) => {
+  const classes = useStyles();
+  const { option } = props;
+
+  return (
+    <div className={classes.menu2Mobile}>
+      {option?.submenus?.map((submenu) => (
+        <div key={submenu.id}>
+          <Button className={classes.menu1buttons}>
+            <Typography
+              variant="body1"
+              fontWeight={400}
+              noWrap
+              style={{ overflow: "hidden", textOverflow: "ellipsis" }}
+            >
+              {submenu.name}
+            </Typography>
+          </Button>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+type Menu3Props = {
+  subMenuId: number | undefined;
+  setIsHovered: Dispatch<SetStateAction<number | undefined>>;
+};
+
+const Menu3 = (props: Menu3Props) => {
+  const { subMenuId, setIsHovered } = props;
+  const handleMouseEnter = (elementId: number | undefined) => {
+    setIsHovered(elementId);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(undefined);
+  };
+
+  const classes = useStyles();
+  const findSubmenuById = (
+    submenuId: number | undefined
+  ): SubMenu | undefined => {
+    for (const option of options) {
+      const foundSubmenu = option.submenus.find(
+        (submenu) => submenu.id === submenuId
+      );
+      if (foundSubmenu) {
+        return foundSubmenu;
+      }
+    }
+    return undefined; // Return undefined if no submenu is found
+  };
+  const subMenu = findSubmenuById(subMenuId);
+  return (
+    <>
+      {subMenuId && (
+        <div
+          className={classes.menu3}
+          onMouseEnter={() => handleMouseEnter(subMenuId)}
+          onMouseLeave={handleMouseLeave}
+        >
+          <Image
+            src={subMenu?.img || "/default.jpg"}
+            alt={subMenu?.name || "/default"}
+            width={450}
+            height={450}
+          />
+          <Typography variant="h6">{subMenu?.name}</Typography>
+          <Typography variant="body1">{subMenu?.text}</Typography>
+        </div>
+      )}
+    </>
+  );
+};
 
 const options = [
   {
@@ -266,147 +617,3 @@ const options = [
     ],
   },
 ];
-
-type SubMenu = { name: string; id: number; img: string; text: string };
-type Option = {
-  name: string;
-  id: number;
-  submenus?: { name: string; id: number; img: string }[];
-};
-
-type Menu1Props = {
-  open: Record<string, boolean>;
-  setIsMenu1Open: Dispatch<SetStateAction<Record<string, boolean>>>;
-};
-
-const Menu1 = (props: Menu1Props) => {
-  const { open, setIsMenu1Open } = props;
-  const classes = useStyles();
-  const handleButtonClick = (optionName: string) => {
-    setIsMenu1Open((prevOpen) => ({
-      ...Object.fromEntries(
-        Object.entries(prevOpen).map(([key]) => [key, false])
-      ),
-      [optionName]: !prevOpen[optionName],
-    }));
-  };
-
-  return (
-    <div>
-      {options.map((option) => (
-        <Grid container key={option.id} direction="column" mb={2}>
-          <Button
-            className={classes.menu1buttons}
-            onClick={() => handleButtonClick(option.name)}
-            disableRipple
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="40"
-              height="40"
-              viewBox="0 0 160 160"
-              className={classes.vertical}
-            >
-              <rect
-                x="70"
-                width="20"
-                height="160"
-                className={
-                  open[option.name as string]
-                    ? classes.transform
-                    : classes.vertical
-                }
-              />
-              <rect y="70" width="160" height="20" />
-            </svg>
-            <Typography variant="h4">{option.name}</Typography>
-          </Button>
-        </Grid>
-      ))}
-    </div>
-  );
-};
-
-type Menu2Props = {
-  option: Option | undefined;
-  open: Record<string, boolean>;
-  setIsHovered: Dispatch<SetStateAction<number | null | undefined>>;
-};
-
-const Menu2 = (props: Menu2Props) => {
-  const classes = useStyles();
-  const { option, open, setIsHovered } = props;
-
-  const handleMouseEnter = (elementId: number | undefined) => {
-    setIsHovered(elementId);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(null);
-  };
-
-  return (
-    <div className={classes.menu2}>
-      {option?.submenus?.map((submenu) => (
-        <div
-          key={submenu.id}
-          onMouseEnter={() => handleMouseEnter(submenu.id)}
-          onMouseLeave={handleMouseLeave}
-        >
-          <Button className={classes.menu1buttons}>
-            <Typography
-              variant="h6"
-              fontWeight={400}
-              noWrap
-              style={{ overflow: "hidden", textOverflow: "ellipsis" }}
-            >
-              {submenu.name}
-            </Typography>
-          </Button>
-        </div>
-      ))}
-    </div>
-  );
-};
-
-type Menu3Props = {
-  subMenuId: number;
-};
-
-const Menu3 = (props: Menu3Props) => {
-  const { subMenuId } = props;
-
-  const classes = useStyles();
-  const findSubmenuById = (submenuId: number): SubMenu | undefined => {
-    for (const option of options) {
-      const foundSubmenu = option.submenus.find(
-        (submenu) => submenu.id === submenuId
-      );
-      if (foundSubmenu) {
-        return foundSubmenu;
-      }
-    }
-    return undefined; // Return undefined if no submenu is found
-  };
-  const subMenu = findSubmenuById(subMenuId);
-  return (
-    <div
-      style={{
-        width: 500,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Image
-        src={subMenu?.img || "/default.jpg"}
-        alt={subMenu?.name || "/default"}
-        width={450}
-        height={450}
-      />
-      <Typography variant="h6">{subMenu?.name}</Typography>
-      <Typography variant="body1">{subMenu?.text}</Typography>
-    </div>
-  );
-};
