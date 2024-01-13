@@ -1,10 +1,10 @@
 "use client";
 import { Grid, List, ListItem, Typography, styled } from "@mui/material";
-import Link from "next/link";
 import { contact, klantenService, overWoodUpp } from "./constants";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FooterSection from "./FooterSection";
+import CountriesDrawer from "./CountriesDrawer";
 
 const StyledGrid = styled(Grid)`
   & .MuiListItem-root {
@@ -25,6 +25,9 @@ function Footer() {
           <ListItem>
             <FacebookIcon />
             <InstagramIcon />
+          </ListItem>
+          <ListItem>
+            <CountriesDrawer countries={contact.countries} />
           </ListItem>
         </List>
       </Grid>
