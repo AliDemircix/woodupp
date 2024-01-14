@@ -16,7 +16,7 @@ const StyledGrid = styled(Grid)`
 
 function Footer() {
   return (
-    <StyledGrid container spacing={2} mt={5}>
+    <StyledGrid container spacing={2} mt={5} bgcolor="#F5F5F7">
       <Grid item xs={12} sm={4}>
         <Typography variant="h6">{contact.title}</Typography>
         <List sx={{ padding: 0 }}>

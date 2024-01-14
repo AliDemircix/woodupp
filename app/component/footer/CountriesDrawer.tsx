@@ -11,6 +11,8 @@ import {
   Typography,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import ReactCountryFlag from "react-country-flag";
 
 interface Country {
   countryCode: string;
@@ -37,25 +39,51 @@ const CountriesDrawer = ({ countries }: Countries) => {
 
   return (
     <>
-      <Button onClick={handleToggleMenu} variant="outlined" color="primary">
+      <Button
+        onClick={handleToggleMenu}
+        variant="contained"
+        endIcon={<KeyboardArrowDownIcon />}
+        sx={{
+          backgroundColor: "#fff",
+          color: "#000",
+          boxShadow: "none",
+
+          borderRadius: "24px",
+          "&:hover": {
+            backgroundColor: "#fff",
+            color: "#000",
+            boxShadow: "none",
+          },
+        }}
+      >
+        <ReactCountryFlag
+          className="emojiFlag"
+          countryCode={selectedItem?.countryCode}
+          style={{
+            fontSize: 16,
+            paddingRight: "8px",
+          }}
+          aria-label={selectedItem?.countryName}
+        />
         {selectedItem?.countryName || "Select Item"}
       </Button>
       <Drawer
         anchor="bottom"
         open={isMenuOpen}
         onClose={handleToggleMenu}
-        PaperProps={{ style: { width: "100%", height: "100%" } }}
+        PaperProps={{
+          style: { width: "100%", height: "100%", position: "relative" },
+        }}
       >
-        <Grid container justifyContent="space-between" alignItems="center">
-          <IconButton
-            onClick={handleToggleMenu}
-            color="inherit"
-            aria-label="close"
-          >
-            <CloseIcon />
-          </IconButton>
-        </Grid>
-        <Grid container spacing={2}>
+        <IconButton
+          onClick={handleToggleMenu}
+          color="inherit"
+          aria-label="close"
+          sx={{ position: "absolute", top: 10, right: 10, zIndex: 5 }}
+        >
+          <CloseIcon />
+        </IconButton>
+        <Grid container spacing={2} sx={{ p: 2 }}>
           {Array.from(new Set(countries.map((country) => country.region))).map(
             (region) => (
               <Grid item xs={12} sm={6} md={4} key={region}>
@@ -67,8 +95,18 @@ const CountriesDrawer = ({ countries }: Countries) => {
                         <ListItem
                           onClick={() => handleMenuItemClick(country)}
                           key={country.countryCode}
+                          sx={{ pl: 0, cursor: "pointer" }}
                         >
-                          <ListItemText>{country.countryName}</ListItemText>
+                          <ReactCountryFlag
+                            countryCode={country.countryCode}
+                            style={{
+                              fontSize: 16,
+                            }}
+                            aria-label={country.countryName}
+                          />
+                          <ListItemText sx={{ fontSize: 8, pl: 1 }}>
+                            {country.countryName}
+                          </ListItemText>
                         </ListItem>
                       )
                   )}

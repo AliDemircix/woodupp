@@ -5,6 +5,7 @@ export const contact = {
     "Maandag t/m donderdag: 8.30 – 16.30 uur Vrijdag: 8.30 – 13.30 uur",
   countries: [
     { countryCode: "NL", countryName: "Netherlands", region: "Europe" },
+    { countryCode: "TR", countryName: "Turkey", region: "Europe" },
     { countryCode: "BG", countryName: "Belgium", region: "Americas" },
     { countryCode: "DE", countryName: "Deutschland", region: "Africa" },
   ],
