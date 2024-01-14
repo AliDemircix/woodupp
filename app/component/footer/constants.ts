@@ -1,6 +1,7 @@
 export const contact = {
   title: "Contact",
   tel: "+31 6 12312312",
+  email: "abcd@gmail.com",
   openTimes:
     "Maandag t/m donderdag: 8.30 – 16.30 uur Vrijdag: 8.30 – 13.30 uur",
   countries: [

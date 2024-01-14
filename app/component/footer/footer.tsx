@@ -8,19 +8,19 @@ import CountriesDrawer from "./CountriesDrawer";
 
 const StyledGrid = styled(Grid)`
   & .MuiListItem-root {
-    padding-left: 0;
-    padding-right: 0;
-    font-size: 14px;
+    padding: 4px 0px 4px 0px;
+    font-size: 12px;
   }
 `;
 
 function Footer() {
   return (
-    <StyledGrid container spacing={2} mt={5} bgcolor="#F5F5F7">
+    <StyledGrid container spacing={3} sx={{ mt: 5, p: 5 }} bgcolor="#F5F5F7">
       <Grid item xs={12} sm={4}>
         <Typography variant="h6">{contact.title}</Typography>
         <List sx={{ padding: 0 }}>
-          <ListItem>{contact.tel}</ListItem>
+          <ListItem sx={{ fontWeight: "bold" }}>{contact.tel}</ListItem>
+          <ListItem sx={{ fontWeight: "bold" }}>{contact.email}</ListItem>
           <ListItem>{contact.openTimes}</ListItem>
           <ListItem>
             <FacebookIcon />

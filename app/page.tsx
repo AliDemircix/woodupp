@@ -8,8 +8,8 @@ export default function Home() {
       <Navbar />
       <Container>
         <ProductHero />
-        <Footer />
       </Container>
+      <Footer />
     </main>
   );
 }
