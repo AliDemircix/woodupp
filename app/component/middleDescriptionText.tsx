@@ -31,7 +31,7 @@ function MiddleDescriptionText() {
   console.log(scrollPosition);
   return (
     <Stack
-      mt={5}
+      my={10}
       alignItems={'flex-start'}
       color={'#3d3d3d'}
       width="90%"

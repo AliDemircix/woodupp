@@ -4,6 +4,7 @@ import ProductHero from './component/producthero/productHero';
 import Footer from './component/footer/footer';
 import StaticHeader from './component/header/staticHeader';
 import MiddleDescriptionText from './component/middleDescriptionText';
+import ProductsSlider from './component/slider/productsSlider';
 export default function Home() {
   return (
     <main>
@@ -12,6 +13,7 @@ export default function Home() {
       <Container>
         <ProductHero />
         <MiddleDescriptionText />
+        <ProductsSlider />
       </Container>
       <Footer />
     </main>
