@@ -1,10 +1,10 @@
-"use client";
-import { Grid, List, ListItem, Typography, styled } from "@mui/material";
-import { contact, klantenService, overWoodUpp } from "./constants";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import FooterSection from "./FooterSection";
-import CountriesDrawer from "./CountriesDrawer";
+'use client';
+import { Grid, List, ListItem, Typography, styled } from '@mui/material';
+import { contact, klantenService, overWoodUpp } from './constants';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import CountriesDrawer from './CountriesDrawer';
+import FooterSection from './footerSection';
 
 const StyledGrid = styled(Grid)`
   & .MuiListItem-root {
@@ -19,8 +19,8 @@ function Footer() {
       <Grid item xs={12} sm={4}>
         <Typography variant="h6">{contact.title}</Typography>
         <List sx={{ padding: 0 }}>
-          <ListItem sx={{ fontWeight: "bold" }}>{contact.tel}</ListItem>
-          <ListItem sx={{ fontWeight: "bold" }}>{contact.email}</ListItem>
+          <ListItem sx={{ fontWeight: 'bold' }}>{contact.tel}</ListItem>
+          <ListItem sx={{ fontWeight: 'bold' }}>{contact.email}</ListItem>
           <ListItem>{contact.openTimes}</ListItem>
           <ListItem>
             <FacebookIcon />

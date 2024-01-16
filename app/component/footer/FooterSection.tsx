@@ -1,4 +1,4 @@
-import { ExpandMore } from "@mui/icons-material";
+import { ExpandMore } from '@mui/icons-material';
 import {
   Accordion,
   AccordionDetails,
@@ -8,9 +8,9 @@ import {
   Typography,
   styled,
   useMediaQuery,
-} from "@mui/material";
-import Link from "next/link";
-import React from "react";
+} from '@mui/material';
+import Link from 'next/link';
+import React from 'react';
 
 interface Links {
   title: string;
@@ -18,24 +18,26 @@ interface Links {
 }
 
 interface FooterSectionProps {
-  title: string;
-  links: Links[];
+  section: {
+    title: string;
+    links: Links[];
+  };
 }
 
 function FooterSection({ section }: FooterSectionProps) {
-  const isSmallScreen = useMediaQuery("(max-width:600px)");
+  const isSmallScreen = useMediaQuery('(max-width:600px)');
 
   if (isSmallScreen) {
     return (
-      <Accordion sx={{ bgcolor: "#F5F5F7", boxShadow: "none" }}>
+      <Accordion sx={{ bgcolor: '#F5F5F7', boxShadow: 'none' }}>
         <AccordionSummary
           expandIcon={<ExpandMore />}
           sx={{
             px: 0,
             borderBottom: 1,
-            borderColor: "grey.500",
-            minHeight: "unset",
-            "& .MuiAccordionSummary-content": {
+            borderColor: 'grey.500',
+            minHeight: 'unset',
+            '& .MuiAccordionSummary-content': {
               my: 1,
             },
           }}
