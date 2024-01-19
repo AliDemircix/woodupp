@@ -115,3 +115,37 @@ export const products: Product[] = [
     ],
   },
 ];
+export const middleHeroData = [
+  {
+    id: 'hero1',
+    title: 'De Opmetingen',
+    img: {
+      src: '/pr1.jpg',
+      alt: 'opbouw paneel',
+    },
+    content: [
+      'Opbouw paneel',
+      'Afmeting 240/300cm x 60cm',
+      'Lat dikte 13mm',
+      'Lat breedte 27mm',
+      'Vilt dikte 9mm',
+      'Paneel dikte 24mm',
+      'Afstand tussen de latten is 13mm',
+    ],
+  },
+  {
+    id: 'hero2',
+    title: 'De Lagen Van Het Product',
+    img: {
+      src: '/pr2.jpg',
+      alt: 'duurzame materialen',
+    },
+    content: [
+      'Duurzame materialen',
+      'Gereeyeled vilt',
+      'Geluidsabsorerend (%85)',
+      'Goede kwaliteit',
+      'Betere akoestiek',
+    ],
+  },
+];
