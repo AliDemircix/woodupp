@@ -33,13 +33,20 @@ function MiddleDescriptionText() {
   }, []);
   return (
     <Stack
-      my={10}
+      mt={10}
+      mb={4}
       alignItems={'flex-start'}
       color={'#3d3d3d'}
       width="90%"
       mx={'auto'}
     >
-      <Typography variant="h1" fontWeight={500} mb={3} mx={'auto'}>
+      <Typography
+        variant="h1"
+        fontWeight={500}
+        mb={3}
+        mx={'auto'}
+        textAlign={'center'}
+      >
         {textData.title}
       </Typography>
       <Typography variant="h4" fontWeight={500} my={1} mx={'auto'}>
