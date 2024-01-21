@@ -31,17 +31,17 @@ export function MiddleHeroItem({
     <Grid
       container
       direction={id === 'hero2' ? 'row-reverse' : 'row'}
-      maxHeight={350}
       overflow={'hidden'}
       my={2}
+      sx={{ backgroundColor: smallScreen ? '#F5F5F7' : 'none' }}
     >
-      <Grid item xs={6}>
+      <Grid item xs={12} md={6}>
         <img
           src={img.src}
           alt={img.alt}
           style={{
             borderRadius: id === 'hero2' ? '0 24px 24px 0' : '24px 0 0 24px',
-            width: smallScreen ? '240px' : '700px',
+            width: smallScreen ? '100%' : '700px',
             height: '350px',
             objectFit: smallScreen ? 'fill' : 'cover',
           }}
@@ -50,7 +50,8 @@ export function MiddleHeroItem({
 
       <Grid
         item
-        xs={6}
+        xs={12}
+        md={6}
         borderRadius={id === 'hero2' ? ' 24px 0 0 24px' : ' 0  24px 24px 0'}
         sx={{ backgroundColor: '#F5F5F7' }}
         alignItems="center"

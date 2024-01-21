@@ -24,12 +24,12 @@ export default function CategoryTabPanel({
         backgroundColor: 'hsla(0,0%,100%,.4)',
         borderRadius: '100px',
         boxSizing: 'border-box',
-        padding: '15px 20px',
+        padding: smallScreen ? '5px' : '15px 20px',
         position: 'absolute',
         top: '50px',
         left: '20px',
         right: '20px',
-        width: smallScreen ? '400px' : '420px',
+        width: smallScreen ? '330px' : '420px',
       }}
       direction={'row'}
     >
@@ -38,7 +38,7 @@ export default function CategoryTabPanel({
           <Stack
             key={product.id}
             borderRadius="100px"
-            p={2}
+            p={smallScreen ? 1 : 2}
             sx={{
               backgroundColor: selectedProductId === product.id ? 'white' : '',
               cursor: 'pointer',

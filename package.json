@@ -1,6 +1,7 @@
 {
   "name": "woodupp",
   "version": "0.1.0",
+  "homepage": "https://woodupp.ademircix.com",
   "private": true,
   "scripts": {
     "dev": "next dev",

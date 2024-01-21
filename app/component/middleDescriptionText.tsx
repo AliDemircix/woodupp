@@ -1,5 +1,5 @@
 'use client';
-import { Stack, Typography } from '@mui/material';
+import { Stack, Typography, useMediaQuery } from '@mui/material';
 import { useEffect, useState } from 'react';
 import TextureIcon from '@mui/icons-material/Texture';
 
@@ -31,22 +31,18 @@ function MiddleDescriptionText() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+  const smallScreen = useMediaQuery('(max-width:700px)');
   return (
     <Stack
       mt={10}
       mb={4}
       alignItems={'flex-start'}
       color={'#3d3d3d'}
-      width="90%"
+      width={smallScreen ? '100%' : '90%'}
       mx={'auto'}
+      textAlign={'center'}
     >
-      <Typography
-        variant="h1"
-        fontWeight={500}
-        mb={3}
-        mx={'auto'}
-        textAlign={'center'}
-      >
+      <Typography variant="h1" fontWeight={500} mb={3} mx={'auto'}>
         {textData.title}
       </Typography>
       <Typography variant="h4" fontWeight={500} my={1} mx={'auto'}>
@@ -67,9 +63,8 @@ function MiddleDescriptionText() {
             my={0.6}
             letterSpacing={1.5}
             lineHeight={1.8}
-            width={'65%'}
+            width={smallScreen ? '100%' : '65%'}
             mx={'auto '}
-            textAlign={'center'}
           >
             {t}
           </Typography>

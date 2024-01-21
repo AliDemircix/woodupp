@@ -21,7 +21,6 @@ function ProductsSlider() {
               style={{
                 objectFit: 'fill',
                 width: '100%',
-                height: '600px',
                 borderRadius: '24px',
               }}
               src={i}
