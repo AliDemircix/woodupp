@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { Box, Button, IconButton, Slide, Typography } from "@mui/material";
-import Image from "next/image";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { theme } from "../../theme/theme";
+import React, { useState } from 'react';
+import { Box, Button, IconButton, Slide, Typography } from '@mui/material';
+import Image from 'next/image';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { theme } from '../../theme/theme';
 
 interface ProductDetailImageCarouselProps {
   images: string[];
@@ -15,15 +15,17 @@ const ProductDetailImageCarousel: React.FC<ProductDetailImageCarouselProps> = ({
   images,
 }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [direction, setDirection] = useState("right");
+  const [direction, setDirection] = useState<'right' | 'left' | 'up' | 'down'>(
+    'right',
+  );
 
   const handleBack = () => {
-    setDirection("left");
+    setDirection('left');
     setCurrentSlide((prevSlide) => Math.max(prevSlide - 1, 0));
   };
 
   const handleForward = () => {
-    setDirection("right");
+    setDirection('right');
     setCurrentSlide((prevSlide) => Math.min(prevSlide + 1, images.length - 1));
   };
 
@@ -51,10 +53,10 @@ const ProductDetailImageCarousel: React.FC<ProductDetailImageCarouselProps> = ({
         <Typography
           variant="body2"
           sx={{
-            display: "inline-block",
+            display: 'inline-block',
             padding: theme.spacing(0.5, 1),
             borderRadius: 16,
-            backgroundColor: "white",
+            backgroundColor: 'white',
           }}
         >
           {currentSlide + 1} / {images.length}
@@ -65,14 +67,14 @@ const ProductDetailImageCarousel: React.FC<ProductDetailImageCarouselProps> = ({
           onClick={handleBack}
           aria-label="back"
           sx={{
-            position: "absolute",
-            top: "50%",
+            position: 'absolute',
+            top: '50%',
             left: 10,
-            backgroundColor: "white",
+            backgroundColor: 'white',
             opacity: 0.9,
 
-            "&:hover": {
-              backgroundColor: "white",
+            '&:hover': {
+              backgroundColor: 'white',
               opacity: 0.9,
             },
           }}
@@ -86,14 +88,14 @@ const ProductDetailImageCarousel: React.FC<ProductDetailImageCarouselProps> = ({
           onClick={handleForward}
           aria-label="back"
           sx={{
-            position: "absolute",
-            top: "50%",
+            position: 'absolute',
+            top: '50%',
             right: 10,
-            backgroundColor: "white",
+            backgroundColor: 'white',
             opacity: 0.9,
 
-            "&:hover": {
-              backgroundColor: "white",
+            '&:hover': {
+              backgroundColor: 'white',
               opacity: 0.9,
             },
           }}
