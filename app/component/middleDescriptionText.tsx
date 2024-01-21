@@ -39,22 +39,32 @@ function MiddleDescriptionText() {
       width="90%"
       mx={'auto'}
     >
-      <Typography variant="h1" fontWeight={500} mb={2}>
+      <Typography variant="h1" fontWeight={500} mb={3} mx={'auto'}>
         {textData.title}
       </Typography>
-      <Typography variant="h4" fontWeight={500} my={1}>
+      <Typography variant="h4" fontWeight={500} my={1} mx={'auto'}>
         {textData.question1}
       </Typography>
-      <Typography variant="h4" fontWeight={500} my={1}>
+      <Typography variant="h4" fontWeight={500} my={1} mx={'auto'}>
         {textData.question2}
       </Typography>
-      <Typography variant="body1" fontWeight={500} my={2}>
+      <Typography variant="h4" fontWeight={500} mt={1} mb={3} mx={'auto'}>
         {textData.answer}
       </Typography>
       {textData.text.map((t, i) => {
         return (
-          <Typography key={i} variant="body1" fontWeight={500} my={0.7}>
-            <TextureIcon sx={{ fontSize: '16px', mr: 1 }} /> {t}
+          <Typography
+            key={i}
+            variant="body1"
+            fontWeight={500}
+            my={0.6}
+            letterSpacing={1.5}
+            lineHeight={1.8}
+            width={'65%'}
+            mx={'auto '}
+            textAlign={'center'}
+          >
+            {t}
           </Typography>
         );
       })}
