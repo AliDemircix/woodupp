@@ -239,7 +239,9 @@ export default function Navbar() {
               </div>
             )}
           </Dialog>
-          <h2>ECD Wall Panel</h2>
+          <Link href="/">
+            <Typography variant="h4">ECD Wall Panel</Typography>
+          </Link>
           <IconButton
             size="large"
             edge="start"
@@ -416,10 +418,7 @@ const Menu2 = (props: Menu2Props) => {
           onMouseEnter={() => handleMouseEnter(submenu.id)}
           onMouseLeave={handleMouseLeave}
         >
-          <Link
-            className={classes.menu1buttons}
-            href={`/product/${submenu.link}`}
-          >
+          <Link className={classes.menu1buttons} href={`/${submenu.link}`}>
             <Typography
               variant="h6"
               fontWeight={400}
@@ -518,28 +517,28 @@ const options = [
     submenus: [
       {
         name: "Akupanel 240*60",
-        link: "akupanel-240",
+        link: "product/akupanel-240",
         id: 1,
         img: "/example.jpg",
         text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
       },
       {
         name: "Akupanel 300*60",
-        link: "akupanel-300",
+        link: "product/akupanel-300",
         id: 2,
         img: "/example.jpg",
         text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
       },
       {
         name: "Eindlaat",
-        link: "eindlaat",
+        link: "product/eindlaat",
         id: 3,
         img: "/example.jpg",
         text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
       },
       {
         name: "Kleurstalen",
-        link: "kleurstalen",
+        link: "product/kleurstalen",
         id: 4,
         img: "/example.jpg",
         text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
