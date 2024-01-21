@@ -1,6 +1,8 @@
 'use client';
 import { Stack, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
+import TextureIcon from '@mui/icons-material/Texture';
+
 const textData = {
   title: 'WAAROM HOUTPANEEL?',
   question1: 'Wil je een stoere uitstraling aan je sfeer toevoegen?',
@@ -14,6 +16,7 @@ const textData = {
     'Houten panelen zijn gemaakt van duurzame materialen. Het akoestische vilt is gemaakt van gerecycled plastic en de lamellen zijn gemaakt van MDF met een fineeroppervlak.',
   ],
 };
+
 function MiddleDescriptionText() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const handleScroll = () => {
@@ -28,7 +31,6 @@ function MiddleDescriptionText() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-  console.log(scrollPosition);
   return (
     <Stack
       my={10}
@@ -36,25 +38,23 @@ function MiddleDescriptionText() {
       color={'#3d3d3d'}
       width="90%"
       mx={'auto'}
-      maxHeight={300}
-      overflow={'auto'}
     >
-      <Typography variant="h2" fontWeight={500} my={0.4}>
+      <Typography variant="h1" fontWeight={500} mb={2}>
         {textData.title}
       </Typography>
-      <Typography variant="h2" fontWeight={500} my={0.4}>
+      <Typography variant="h4" fontWeight={500} my={1}>
         {textData.question1}
       </Typography>
-      <Typography variant="h2" fontWeight={500} my={0.4}>
+      <Typography variant="h4" fontWeight={500} my={1}>
         {textData.question2}
       </Typography>
-      <Typography variant="h2" fontWeight={500} my={0.4}>
+      <Typography variant="body1" fontWeight={500} my={2}>
         {textData.answer}
       </Typography>
       {textData.text.map((t, i) => {
         return (
-          <Typography key={i} variant="h2" fontWeight={500} my={0.4}>
-            {t}
+          <Typography key={i} variant="body1" fontWeight={500} my={0.7}>
+            <TextureIcon sx={{ fontSize: '16px', mr: 1 }} /> {t}
           </Typography>
         );
       })}
