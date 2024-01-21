@@ -1,7 +1,7 @@
 'use client';
 import { Stack, Typography } from '@mui/material';
 import Carousel from 'nuka-carousel';
-const imgs = Array.from({ length: 15 }, (_, index) => `/${index + 1}.jpg`);
+const imgs = Array.from({ length: 15 }, (_, index) => `/${index + 1}.png`);
 function ProductsSlider() {
   return (
     <Stack direction={'column'} alignItems={'center'} mt={2}>
