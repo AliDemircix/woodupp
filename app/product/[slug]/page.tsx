@@ -5,7 +5,7 @@ import Footer from "../../component/footer/footer";
 import { products } from "../../lib/producthero/constants";
 import ProductDetailImageCarousel from "../../component/productDetail/ProductDetailImageCarousel";
 
-const getData = async (slug: string) => {
+export const getData = async (slug: string) => {
   const res = await products.find((product) => product.code === slug);
 
   if (!res) {
@@ -17,7 +17,7 @@ const getData = async (slug: string) => {
 
 async function ProductDetailPage({ params }: { params: { slug: string } }) {
   const product = await getData(params.slug);
-  console.log(params);
+
   return (
     <div>
       <StaticHeader />

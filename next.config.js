@@ -6,7 +6,6 @@
 //Deployed
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export', //for deployment
   images: {
     unoptimized: true,
   },

@@ -442,7 +442,7 @@ const Menu2Mobile = (props: Menu2MobileProps) => {
     <div className={classes.menu2Mobile}>
       {option?.submenus?.map((submenu) => (
         <div key={submenu.id}>
-          <Button className={classes.menu1buttons}>
+          <Link className={classes.menu1buttons} href={`/${submenu.link}`}>
             <Typography
               variant="body1"
               fontWeight={400}
@@ -451,7 +451,7 @@ const Menu2Mobile = (props: Menu2MobileProps) => {
             >
               {submenu.name}
             </Typography>
-          </Button>
+          </Link>
         </div>
       ))}
     </div>
@@ -531,14 +531,14 @@ const options = [
       },
       {
         name: "Eindlaat",
-        link: "product/eindlaat",
+        link: "eindlaat",
         id: 3,
         img: "/example.jpg",
         text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
       },
       {
         name: "Kleurstalen",
-        link: "product/kleurstalen",
+        link: "kleurstalen",
         id: 4,
         img: "/example.jpg",
         text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
