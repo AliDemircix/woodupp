@@ -31,7 +31,7 @@ function MiddleDescriptionText() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-  const smallScreen = useMediaQuery('(max-width:700px)');
+  const smallScreen = useMediaQuery('(max-width:600px)');
   return (
     <Stack
       mt={10}

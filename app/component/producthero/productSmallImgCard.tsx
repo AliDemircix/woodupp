@@ -22,7 +22,7 @@ export default function ProductSmallImgCard({
   setSelectedImage,
   setSelectedGroup,
 }: Props) {
-  const smallScreen = useMediaQuery('(max-width:700px)');
+  const smallScreen = useMediaQuery('(max-width:600px)');
 
   return (
     <Stack

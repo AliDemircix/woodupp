@@ -16,7 +16,7 @@ export default function ProductCard({
   const selectedProductImage = selectedProductDetails?.thumbnailImages.find(
     (i) => i.id === selectedSmallImageId,
   );
-  const smallScreen = useMediaQuery('(max-width:700px)');
+  const smallScreen = useMediaQuery('(max-width:600px)');
 
   return (
     <Stack

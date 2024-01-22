@@ -26,7 +26,7 @@ export function MiddleHeroItem({
   img,
   content,
 }: MiddleHeroItemType) {
-  const smallScreen = useMediaQuery('(max-width:700px)');
+  const smallScreen = useMediaQuery('(max-width:600px)');
   return (
     <Grid
       container

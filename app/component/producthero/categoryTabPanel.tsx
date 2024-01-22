@@ -17,7 +17,7 @@ export default function CategoryTabPanel({
   setSelectedImage,
   setSelectedSmallImageId,
 }: Props) {
-  const smallScreen = useMediaQuery('(max-width:700px)');
+  const smallScreen = useMediaQuery('(max-width:600px)');
   return (
     <Stack
       sx={{
