@@ -7,6 +7,7 @@ import StaticHeader from './component/header/staticHeader';
 import MiddleDescriptionText from './component/middleDescriptionText';
 import ProductsSlider from './component/slider/productsSlider';
 import { MiddleHero } from './component/producthero/middleHero';
+import { VideoBackground } from './component/videoBackground';
 export default function Home() {
   const smallScreen = useMediaQuery('(max-width:600px)');
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <Navbar />
       <Container maxWidth="xl">
         <Stack maxWidth={smallScreen ? '100%' : '90%'} m="auto">
+          <VideoBackground />
           <ProductHero />
           <MiddleDescriptionText />
           <ProductsSlider />
