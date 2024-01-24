@@ -10,7 +10,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import TextureIcon from '@mui/icons-material/Texture';
 import Dialog from '@mui/material/Dialog';
 import CloseIcon from '@mui/icons-material/Close';
-import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
@@ -19,7 +18,6 @@ import { Dispatch, SetStateAction } from 'react';
 import Image from 'next/image';
 import { useMediaQuery } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
-import AccordionActions from '@mui/material/AccordionActions';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Link from 'next/link';
@@ -196,6 +194,7 @@ export default function Navbar() {
               <div>
                 <MenuMobile
                   open={isMenu1Open}
+                  setOpen={setOpen}
                   setIsMenu1Open={setIsMenu1Open}
                 />
               </div>
@@ -218,10 +217,15 @@ export default function Navbar() {
                     minWidth: '100%',
                   }}
                 >
-                  <Menu1 open={isMenu1Open} setIsMenu1Open={setIsMenu1Open} />
+                  <Menu1
+                    open={isMenu1Open}
+                    setIsMenu1Open={setIsMenu1Open}
+                    setOpen={setOpen}
+                  />
                   <div style={{ display: 'flex', gap: 0 }}>
                     {openOption && (
                       <Menu2
+                        setOpen={setOpen}
                         option={options.find(
                           (option) => option.name === openOption,
                         )}
@@ -275,6 +279,7 @@ type Option = {
 
 type Menu1Props = {
   open: Record<string, boolean>;
+  setOpen: (value: boolean) => void;
   setIsMenu1Open: Dispatch<SetStateAction<Record<string, boolean>>>;
 };
 
@@ -327,7 +332,7 @@ const Menu1 = (props: Menu1Props) => {
 };
 
 const MenuMobile = (props: Menu1Props) => {
-  const { open, setIsMenu1Open } = props;
+  const { open, setIsMenu1Open, setOpen } = props;
   const classes = useStyles();
   const handleButtonClick = (optionName: string) => {
     setIsMenu1Open((prevOpen) => ({
@@ -379,6 +384,8 @@ const MenuMobile = (props: Menu1Props) => {
           </AccordionSummary>
           <AccordionDetails>
             <Menu2Mobile
+              setOpen={setOpen}
+              open={open}
               option={options.find((option) => option.name === option.name)}
             />
           </AccordionDetails>
@@ -392,15 +399,18 @@ type Menu2Props = {
   option: Option | undefined;
   open: Record<string, boolean>;
   setIsHovered: Dispatch<SetStateAction<number | undefined>>;
+  setOpen: (a: boolean) => void;
 };
 
 type Menu2MobileProps = {
   option: Option | undefined;
+  open: Record<string, boolean>;
+  setOpen: (a: boolean) => void;
 };
 
 const Menu2 = (props: Menu2Props) => {
   const classes = useStyles();
-  const { option, open, setIsHovered } = props;
+  const { option, setOpen, setIsHovered } = props;
 
   const handleMouseEnter = (elementId: number | undefined) => {
     setIsHovered(elementId);
@@ -417,6 +427,9 @@ const Menu2 = (props: Menu2Props) => {
           key={submenu.id}
           onMouseEnter={() => handleMouseEnter(submenu.id)}
           onMouseLeave={handleMouseLeave}
+          onClick={() => {
+            setOpen(!open);
+          }}
         >
           <Link className={classes.menu1buttons} href={`/${submenu.link}`}>
             <Typography
@@ -436,12 +449,17 @@ const Menu2 = (props: Menu2Props) => {
 
 const Menu2Mobile = (props: Menu2MobileProps) => {
   const classes = useStyles();
-  const { option } = props;
+  const { option, setOpen, open } = props;
 
   return (
     <div className={classes.menu2Mobile}>
       {option?.submenus?.map((submenu) => (
-        <div key={submenu.id}>
+        <div
+          key={submenu.id}
+          onClick={() => {
+            setOpen(!open);
+          }}
+        >
           <Link className={classes.menu1buttons} href={`/${submenu.link}`}>
             <Typography
               variant="body1"
@@ -618,7 +636,7 @@ const options = [
     submenus: [
       {
         name: 'Contact',
-        link: 'customer/contact',
+        link: 'contact',
         id: 12,
         img: '/example.jpg',
         text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',

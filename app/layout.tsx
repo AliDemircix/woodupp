@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ThemeRegistry from "./component/ThemeRegistry";
+import StaticHeader from "./component/header/staticHeader";
+import Navbar from "./component/navbar";
+import Footer from "./component/footer/footer";
+import Container from "@mui/material/Container";
 
 export const metadata: Metadata = {
   title: "Next App MUI",
@@ -15,7 +19,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ThemeRegistry>
-        <body>{children}</body>
+        <body>
+          <StaticHeader />
+          <Navbar />
+          <Container maxWidth="xl">{children}</Container>
+          <Footer />
+        </body>
       </ThemeRegistry>
     </html>
   );

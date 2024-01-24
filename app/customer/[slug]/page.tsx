@@ -20,8 +20,6 @@ async function Faq({ params }: { params: { slug: string } }) {
 
   return (
     <div>
-      <StaticHeader />
-      <Navbar />
       <Container maxWidth="xl" sx={{ py: 4 }}>
         {faqData && params.slug === 'vaakgestelde-vragen-en-antworden' && (
           <Stack alignItems={'center'} spacing={3}>
@@ -34,7 +32,6 @@ async function Faq({ params }: { params: { slug: string } }) {
         {params.slug === 'montage' && <>Add Later Montage Page</>}
         {params.slug === 'contact' && <>Add Later contact Page</>}
       </Container>
-      <Footer />
     </div>
   );
 }
