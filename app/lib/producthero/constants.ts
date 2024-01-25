@@ -4,13 +4,21 @@ export type Thumbnail = {
   name: string;
   price: number;
 };
+
+export interface ProductImagesByColor {
+  name: string;
+  colorSamples: string[];
+}
 export type Product = {
   id: number;
   name: string;
   code: string;
+  dimensions: { width: number; height: number; depth: number };
   description: string;
   images: string[];
   thumbnailImages: Thumbnail[];
+  colors: ProductImagesByColor[];
+  productMainImage: { name: string; link: string };
 };
 export const products: Product[] = [
   {
@@ -18,6 +26,31 @@ export const products: Product[] = [
     name: "Akupanel | 240",
     code: "akupanel-240",
     description: "",
+    productMainImage: {
+      name: "cooper-oxide",
+      link: "/walnut-front-100x100.jpg",
+    },
+    dimensions: { width: 240, height: 60, depth: 2.2 },
+    colors: [
+      {
+        name: "copper-oxide",
+        colorSamples: [
+          "/walnut-front-100x100.jpg",
+          "/rustic-grey-oak-front-100x100.jpg",
+          "/akupanel-charcoal-showcase.jpg",
+          "/akupanel-oxide-blue-showcase.jpg",
+        ],
+      },
+      {
+        name: "charcoal",
+        colorSamples: [
+          "/akupanel-charcoal-showcase.jpg",
+          "/akupanel-grey-oxide-100x100.jpg.webp",
+          "/akupanel-oxide-blue-showcase.jpg",
+          "/akupanel-grey-oxide-showcase.jpg",
+        ],
+      },
+    ],
     images: [
       "/akupanel-copper-oxide-showcase.jpg",
       "/akupanel-grey-oxide-showcase.jpg",
@@ -70,6 +103,31 @@ export const products: Product[] = [
     name: "Akupanel | 300 Klassiek Eiken",
     code: "akupanel-300",
     description: "",
+    dimensions: { width: 60, height: 60, depth: 2.2 },
+    productMainImage: {
+      name: "grey-oxide",
+      link: "/classic-oak-black-felt-front-100x100.jpg",
+    },
+    colors: [
+      {
+        name: "grey-oxide",
+        colorSamples: [
+          "/classic-oak-black-felt-front-100x100.jpg",
+          "/classic-oak-black-felt-front-100x100.jpg",
+          "/rustic-natural-oak-front-100x100.jpg",
+          "/rustic-brown-front-100x100.jpg",
+        ],
+      },
+      {
+        name: "grey-oxide",
+        colorSamples: [
+          "/akupanel-60-classic-oak-vertical-2048x2048.png.webp",
+          "/Akupanel60-natural-horisontal.png",
+          "/Akupanel60-brown-horisontal.png",
+          "/Akupanel60-grey-horisontal.png",
+        ],
+      },
+    ],
     images: [
       "/akupanel-60-classic-oak-vertical-2048x2048.png.webp",
       "/akupanel-60-classic-oak-vertical-1536x1536.png",

@@ -1,7 +1,4 @@
 import { Box, Container, Grid, Typography } from "@mui/material";
-import StaticHeader from "../../component/header/staticHeader";
-import Navbar from "../../component/navbar";
-import Footer from "../../component/footer/footer";
 import { products } from "../../lib/producthero/constants";
 import ProductDetailImageCarousel from "../../component/productDetail/ProductDetailImageCarousel";
 import ProductDetailCard from "../../component/productDetail/ProductDetailCard";
@@ -36,10 +33,6 @@ async function ProductDetailPage({ params }: { params: { slug: string } }) {
               {product.name}
             </Typography>
           </Typography>
-          {/* We should retrieve this price from product data */}
-          <Typography variant="h4" mt={1}>
-            155 €
-          </Typography>{" "}
           <Box my={2}>
             <Typography variant="subtitle2">Maat:</Typography>
             <Box>
@@ -47,6 +40,9 @@ async function ProductDetailPage({ params }: { params: { slug: string } }) {
                 <ProductDetailCard key={product.id} product={product} />
               ))}
             </Box>
+          </Box>
+          <Box>
+            <Box></Box>
           </Box>
         </Grid>
       </Grid>
