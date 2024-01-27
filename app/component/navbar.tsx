@@ -21,6 +21,7 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Link from "next/link";
+import { init } from "next/dist/compiled/webpack/webpack";
 
 const useStyles = makeStyles((theme: Theme) => ({
   menu1buttons: {
@@ -196,6 +197,7 @@ export default function Navbar() {
                   open={isMenu1Open}
                   setOpen={setOpen}
                   setIsMenu1Open={setIsMenu1Open}
+                  initialMenu1Open={initialMenu1Open}
                 />
               </div>
             ) : (
@@ -283,6 +285,13 @@ type Menu1Props = {
   setIsMenu1Open: Dispatch<SetStateAction<Record<string, boolean>>>;
 };
 
+type MobileMenu1Props = {
+  open: Record<string, boolean>;
+  setOpen: (value: boolean) => void;
+  setIsMenu1Open: Dispatch<SetStateAction<Record<string, boolean>>>;
+  initialMenu1Open: Record<string, boolean>;
+};
+
 const Menu1 = (props: Menu1Props) => {
   const { open, setIsMenu1Open } = props;
   const classes = useStyles();
@@ -331,66 +340,64 @@ const Menu1 = (props: Menu1Props) => {
   );
 };
 
-const MenuMobile = (props: Menu1Props) => {
-  const { open, setIsMenu1Open, setOpen } = props;
+const MenuMobile = (props: MobileMenu1Props) => {
+  const { open, setIsMenu1Open, setOpen, initialMenu1Open } = props;
   const classes = useStyles();
   const handleButtonClick = (optionName: string) => {
     setIsMenu1Open((prevOpen) => ({
-      ...Object.fromEntries(
-        Object.entries(prevOpen).map(([key]) => [key, false])
-      ),
+      ...prevOpen,
       [optionName]: !prevOpen[optionName],
     }));
   };
-  const openMenu = Object.keys(open).find((key) => open[key]);
+
   return (
     <div>
-      {options.map((option) => (
-        <Accordion className={classes.accordion}>
-          <AccordionSummary
-            aria-controls="panel1-content"
-            id="panel1-header"
-            className={classes.accordionSummary}
-            //classes={{ expanded: classes.accordionSummary }}
-          >
-            <Grid container key={option.id} direction="column">
-              <Button
-                className={classes.menu1buttonsMobile}
-                onClick={() => handleButtonClick(option.name)}
-                disableRipple
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width={"20"}
-                  height={"20"}
-                  viewBox="0 0 160 160"
-                  className={classes.vertical}
+      {options.map((option) => {
+        return (
+          <Accordion className={classes.accordion}>
+            <AccordionSummary
+              aria-controls="panel1-content"
+              id="panel1-header"
+              className={classes.accordionSummary}
+              //classes={{ expanded: classes.accordionSummary }}
+            >
+              <Grid container key={option.id} direction="column">
+                <Button
+                  className={classes.menu1buttonsMobile}
+                  onClick={() => handleButtonClick(option.name)}
+                  disableRipple
                 >
-                  <rect
-                    x="70"
-                    width="20"
-                    height="160"
-                    className={
-                      open[option.name as string]
-                        ? classes.transform
-                        : classes.vertical
-                    }
-                  />
-                  <rect y="70" width="160" height="20" />
-                </svg>
-                <Typography variant={"h5"}>{option.name}</Typography>
-              </Button>
-            </Grid>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Menu2Mobile
-              setOpen={setOpen}
-              open={open}
-              option={options.find((option) => option.name === openMenu)}
-            />
-          </AccordionDetails>
-        </Accordion>
-      ))}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width={"20"}
+                    height={"20"}
+                    viewBox="0 0 160 160"
+                    className={classes.vertical}
+                  >
+                    <rect
+                      x="70"
+                      width="20"
+                      height="160"
+                      className={
+                        open[option.name as string]
+                          ? classes.transform
+                          : classes.vertical
+                      }
+                    />
+                    <rect y="70" width="160" height="20" />
+                  </svg>
+                  <Typography variant={"h5"}>{option.name}</Typography>
+                </Button>
+              </Grid>
+            </AccordionSummary>
+            {open[option.name as string] && (
+              <AccordionDetails>
+                <Menu2Mobile setOpen={setOpen} open={open} option={option} />
+              </AccordionDetails>
+            )}
+          </Accordion>
+        );
+      })}
     </div>
   );
 };
