@@ -1,99 +1,99 @@
-'use client';
-import { useState } from 'react';
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import TextureIcon from '@mui/icons-material/Texture';
-import Dialog from '@mui/material/Dialog';
-import CloseIcon from '@mui/icons-material/Close';
-import Button from '@mui/material/Button';
-import { makeStyles } from '@mui/styles';
-import Grid from '@mui/material/Grid';
-import { Theme } from '@mui/material/styles';
-import { Dispatch, SetStateAction } from 'react';
-import Image from 'next/image';
-import { useMediaQuery } from '@mui/material';
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import Link from 'next/link';
+"use client";
+import { useState } from "react";
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import TextureIcon from "@mui/icons-material/Texture";
+import Dialog from "@mui/material/Dialog";
+import CloseIcon from "@mui/icons-material/Close";
+import Button from "@mui/material/Button";
+import { makeStyles } from "@mui/styles";
+import Grid from "@mui/material/Grid";
+import { Theme } from "@mui/material/styles";
+import { Dispatch, SetStateAction } from "react";
+import Image from "next/image";
+import { useMediaQuery } from "@mui/material";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Link from "next/link";
 
 const useStyles = makeStyles((theme: Theme) => ({
   menu1buttons: {
-    textTransform: 'none',
-    display: 'flex',
-    justifyContent: 'flex-start',
-    padding: '8px 16px',
+    textTransform: "none",
+    display: "flex",
+    justifyContent: "flex-start",
+    padding: "8px 16px",
     gap: 8,
     letterSpacing: 0.5,
     fontWeight: 700,
-    color: '#000000',
-    '&:hover': { background: 'white' },
+    color: "#000000",
+    "&:hover": { background: "white" },
   },
   menu1buttonsMobile: {
-    textTransform: 'none',
-    display: 'flex',
-    flexDirection: 'row-reverse',
-    justifyContent: 'space-between',
-    padding: '8px 32px',
+    textTransform: "none",
+    display: "flex",
+    flexDirection: "row-reverse",
+    justifyContent: "space-between",
+    padding: "8px 32px",
     letterSpacing: 0.5,
     margin: 0,
     fontWeight: 700,
-    color: '#000000',
-    '&:hover': { background: 'white' },
+    color: "#000000",
+    "&:hover": { background: "white" },
   },
   vertical: {
-    transition: 'all 500ms',
-    transform: 'scaleY(1)',
-    transformOrigin: '50% 50%',
+    transition: "all 500ms",
+    transform: "scaleY(1)",
+    transformOrigin: "50% 50%",
   },
   transform: {
-    transform: 'scaleY(0)',
-    transition: 'all 500ms',
-    transformOrigin: '50% 50%',
+    transform: "scaleY(0)",
+    transition: "all 500ms",
+    transformOrigin: "50% 50%",
   },
   menu2: {
-    display: 'flex',
-    flexDirection: 'column',
+    display: "flex",
+    flexDirection: "column",
     gap: 8,
     minWidth: 370,
     margin: 0,
-    '&hover': {
-      cursor: 'pointer',
+    "&hover": {
+      cursor: "pointer",
     },
   },
   menu2Mobile: {
-    display: 'flex',
-    flexDirection: 'column',
+    display: "flex",
+    flexDirection: "column",
     gap: 8,
-    padding: '0 16px',
+    padding: "0 16px",
 
-    '&hover': {
-      cursor: 'pointer',
+    "&hover": {
+      cursor: "pointer",
     },
   },
   menu3: {
     width: 500,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
     margin: 0,
-    cursor: 'pointer',
+    cursor: "pointer",
   },
   accordion: {
-    border: 'none', // Remove the border
+    border: "none", // Remove the border
     margin: 0, // Add the margin at the bottom
-    boxShadow: 'none', // Remove the box shadow
-    '&:not(:last-child)': {
-      borderBottom: '1px solid rgba(0, 0, 0, 0.12)', // Add border between panels
+    boxShadow: "none", // Remove the box shadow
+    "&:not(:last-child)": {
+      borderBottom: "1px solid rgba(0, 0, 0, 0.12)", // Add border between panels
     },
-    '&:before': {
-      display: 'none', // Hide the default border between panels
+    "&:before": {
+      display: "none", // Hide the default border between panels
     },
   },
   accordionSummary: {
@@ -108,7 +108,7 @@ export default function Navbar() {
     Akupanelen: false,
     Inspiratie: false,
     Samples: false,
-    'Offerte Opvragen': false,
+    "Offerte Opvragen": false,
     Klantenservice: false,
   };
   const [isMenu1Open, setIsMenu1Open] = React.useState<{
@@ -118,31 +118,31 @@ export default function Navbar() {
   const openOption = Object.keys(isMenu1Open).find((key) => isMenu1Open[key]);
 
   const [hoveredElementId, setHoveredElementId] = useState<number | undefined>(
-    undefined,
+    undefined
   );
 
   const handleClose = () => setOpen(false);
-  const isBigScreen = useMediaQuery('(min-width: 1500px)');
-  const isMobile = useMediaQuery('(max-width: 900px)');
+  const isBigScreen = useMediaQuery("(min-width: 1500px)");
+  const isMobile = useMediaQuery("(max-width: 900px)");
   return (
     <Box
       sx={{
-        boxShadow: '0 4px 2px -2px gray',
-        position: 'sticky',
+        boxShadow: "0 4px 2px -2px gray",
+        position: "sticky",
         top: 0,
         left: 0,
       }}
     >
       <AppBar
         position="sticky"
-        color={'transparent'}
+        color={"transparent"}
         style={{
           maxWidth: 1440,
-          margin: 'auto',
-          boxShadow: 'none',
+          margin: "auto",
+          boxShadow: "none",
         }}
       >
-        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <IconButton
             disableRipple
             size="large"
@@ -150,11 +150,11 @@ export default function Navbar() {
             color="inherit"
             aria-label="menu"
             sx={{
-              display: 'flex',
+              display: "flex",
               gap: 1,
-              '&:hover': {
+              "&:hover": {
                 borderRadius: 10,
-                background: '#E8E8E8',
+                background: "#E8E8E8",
               },
             }}
             onClick={() => {
@@ -176,7 +176,7 @@ export default function Navbar() {
             open={open}
             onClose={handleClose}
             style={{
-              position: 'absolute',
+              position: "absolute",
               top: 100,
               left: 0,
               margin: 0,
@@ -185,13 +185,13 @@ export default function Navbar() {
             hideBackdrop={true}
             PaperProps={{
               style: {
-                backgroundColor: 'white',
-                boxShadow: 'none',
+                backgroundColor: "white",
+                boxShadow: "none",
               },
             }}
           >
             {isMobile ? (
-              <div>
+              <div style={{ marginTop: 50 }}>
                 <MenuMobile
                   open={isMenu1Open}
                   setOpen={setOpen}
@@ -201,20 +201,20 @@ export default function Navbar() {
             ) : (
               <div
                 style={{
-                  display: 'flex',
-                  padding: isBigScreen ? '3rem 0' : 64,
-                  width: '100%',
+                  display: "flex",
+                  padding: isBigScreen ? "3rem 0" : 64,
+                  width: "100%",
                   maxWidth: 1440,
                   marginTop: 32,
-                  marginLeft: isBigScreen ? 'auto' : '0',
-                  marginRight: isBigScreen ? 'auto' : '0',
+                  marginLeft: isBigScreen ? "auto" : "0",
+                  marginRight: isBigScreen ? "auto" : "0",
                 }}
               >
                 <div
                   style={{
-                    display: 'flex',
+                    display: "flex",
                     gap: isBigScreen ? 140 : 64,
-                    minWidth: '100%',
+                    minWidth: "100%",
                   }}
                 >
                   <Menu1
@@ -222,12 +222,12 @@ export default function Navbar() {
                     setIsMenu1Open={setIsMenu1Open}
                     setOpen={setOpen}
                   />
-                  <div style={{ display: 'flex', gap: 0 }}>
+                  <div style={{ display: "flex", gap: 0 }}>
                     {openOption && (
                       <Menu2
                         setOpen={setOpen}
                         option={options.find(
-                          (option) => option.name === openOption,
+                          (option) => option.name === openOption
                         )}
                         open={isMenu1Open}
                         setIsHovered={setHoveredElementId}
@@ -251,7 +251,7 @@ export default function Navbar() {
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ display: 'flex', gap: 1, '&:hover': { borderRadius: 10 } }}
+            sx={{ display: "flex", gap: 1, "&:hover": { borderRadius: 10 } }}
           >
             <TextureIcon fontSize="small" />
             <Typography variant="body2" component="div" sx={{ flexGrow: 1 }}>
@@ -289,7 +289,7 @@ const Menu1 = (props: Menu1Props) => {
   const handleButtonClick = (optionName: string) => {
     setIsMenu1Open((prevOpen) => ({
       ...Object.fromEntries(
-        Object.entries(prevOpen).map(([key]) => [key, false]),
+        Object.entries(prevOpen).map(([key]) => [key, false])
       ),
       [optionName]: !prevOpen[optionName],
     }));
@@ -306,8 +306,8 @@ const Menu1 = (props: Menu1Props) => {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width={'40'}
-              height={'40'}
+              width={"40"}
+              height={"40"}
               viewBox="0 0 160 160"
               className={classes.vertical}
             >
@@ -323,7 +323,7 @@ const Menu1 = (props: Menu1Props) => {
               />
               <rect y="70" width="160" height="20" />
             </svg>
-            <Typography variant={'h4'}>{option.name}</Typography>
+            <Typography variant={"h4"}>{option.name}</Typography>
           </Button>
         </Grid>
       ))}
@@ -337,12 +337,12 @@ const MenuMobile = (props: Menu1Props) => {
   const handleButtonClick = (optionName: string) => {
     setIsMenu1Open((prevOpen) => ({
       ...Object.fromEntries(
-        Object.entries(prevOpen).map(([key]) => [key, false]),
+        Object.entries(prevOpen).map(([key]) => [key, false])
       ),
       [optionName]: !prevOpen[optionName],
     }));
   };
-
+  const openMenu = Object.keys(open).find((key) => open[key]);
   return (
     <div>
       {options.map((option) => (
@@ -361,8 +361,8 @@ const MenuMobile = (props: Menu1Props) => {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width={'20'}
-                  height={'20'}
+                  width={"20"}
+                  height={"20"}
                   viewBox="0 0 160 160"
                   className={classes.vertical}
                 >
@@ -378,7 +378,7 @@ const MenuMobile = (props: Menu1Props) => {
                   />
                   <rect y="70" width="160" height="20" />
                 </svg>
-                <Typography variant={'h5'}>{option.name}</Typography>
+                <Typography variant={"h5"}>{option.name}</Typography>
               </Button>
             </Grid>
           </AccordionSummary>
@@ -386,7 +386,7 @@ const MenuMobile = (props: Menu1Props) => {
             <Menu2Mobile
               setOpen={setOpen}
               open={open}
-              option={options.find((option) => option.name === option.name)}
+              option={options.find((option) => option.name === openMenu)}
             />
           </AccordionDetails>
         </Accordion>
@@ -436,7 +436,7 @@ const Menu2 = (props: Menu2Props) => {
               variant="h6"
               fontWeight={400}
               noWrap
-              style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}
+              style={{ overflow: "hidden", textOverflow: "ellipsis" }}
             >
               {submenu.name}
             </Typography>
@@ -465,7 +465,7 @@ const Menu2Mobile = (props: Menu2MobileProps) => {
               variant="body1"
               fontWeight={400}
               noWrap
-              style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}
+              style={{ overflow: "hidden", textOverflow: "ellipsis" }}
             >
               {submenu.name}
             </Typography>
@@ -493,11 +493,11 @@ const Menu3 = (props: Menu3Props) => {
 
   const classes = useStyles();
   const findSubmenuById = (
-    submenuId: number | undefined,
+    submenuId: number | undefined
   ): SubMenu | undefined => {
     for (const option of options) {
       const foundSubmenu = option.submenus.find(
-        (submenu) => submenu.id === submenuId,
+        (submenu) => submenu.id === submenuId
       );
       if (foundSubmenu) {
         return foundSubmenu;
@@ -515,8 +515,8 @@ const Menu3 = (props: Menu3Props) => {
           onMouseLeave={handleMouseLeave}
         >
           <Image
-            src={subMenu?.img || '/default.jpg'}
-            alt={subMenu?.name || '/default'}
+            src={subMenu?.img || "/default.jpg"}
+            alt={subMenu?.name || "/default"}
             width={450}
             height={450}
           />
@@ -530,130 +530,130 @@ const Menu3 = (props: Menu3Props) => {
 
 const options = [
   {
-    name: 'Akupanelen',
+    name: "Akupanelen",
     id: 1,
     submenus: [
       {
-        name: 'Akupanel 240*60',
-        link: 'product/akupanel-240',
+        name: "Akupanel 240*60",
+        link: "product/akupanel-240",
         id: 1,
-        img: '/example.jpg',
-        text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
+        img: "/example.jpg",
+        text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
       },
       {
-        name: 'Akupanel 300*60',
-        link: 'product/akupanel-300',
+        name: "Akupanel 300*60",
+        link: "product/akupanel-300",
         id: 2,
-        img: '/example.jpg',
-        text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
+        img: "/example.jpg",
+        text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
       },
       {
-        name: 'Eindlaat',
-        link: 'eindlaat',
+        name: "Eindlaat",
+        link: "eindlaat",
         id: 3,
-        img: '/example.jpg',
-        text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
+        img: "/example.jpg",
+        text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
       },
       {
-        name: 'Kleurstalen',
-        link: 'kleurstalen',
+        name: "Kleurstalen",
+        link: "kleurstalen",
         id: 4,
-        img: '/example.jpg',
-        text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
+        img: "/example.jpg",
+        text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
       },
     ],
   },
   {
-    name: 'Inspiratie',
+    name: "Inspiratie",
     id: 2,
     submenus: [
       {
-        name: 'Woonkamer',
-        link: 'wonkamer',
+        name: "Woonkamer",
+        link: "wonkamer",
         id: 5,
-        img: '/example.jpg',
-        text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
+        img: "/example.jpg",
+        text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
       },
       {
-        name: 'Keuken',
-        link: 'keuken',
+        name: "Keuken",
+        link: "keuken",
         id: 6,
-        img: '/example.jpg',
-        text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
+        img: "/example.jpg",
+        text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
       },
       {
-        name: 'Slaapkamer',
-        link: 'slaapkamer',
+        name: "Slaapkamer",
+        link: "slaapkamer",
         id: 7,
-        img: '/example.jpg',
-        text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
+        img: "/example.jpg",
+        text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
       },
       {
-        name: 'Kantoor',
-        link: 'kantoor',
+        name: "Kantoor",
+        link: "kantoor",
         id: 8,
-        img: '/example.jpg',
-        text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
+        img: "/example.jpg",
+        text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
       },
       {
-        name: 'Gang/Hal',
-        link: 'gang-hal',
+        name: "Gang/Hal",
+        link: "gang-hal",
         id: 9,
-        img: '/example.jpg',
-        text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
+        img: "/example.jpg",
+        text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
       },
     ],
   },
   {
-    name: 'Samples',
+    name: "Samples",
     id: 3,
     submenus: [
       {
-        name: 'Samples',
-        link: 'samples',
+        name: "Samples",
+        link: "samples",
         id: 10,
-        img: '/example.jpg',
-        text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
+        img: "/example.jpg",
+        text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
       },
     ],
   },
   {
-    name: 'Offerte Opvragen',
+    name: "Offerte Opvragen",
     id: 4,
     submenus: [
       {
-        name: 'Offerte Opvragen',
-        link: 'offerte-opvragen',
+        name: "Offerte Opvragen",
+        link: "offerte-opvragen",
         id: 11,
-        img: '/example.jpg',
-        text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
+        img: "/example.jpg",
+        text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
       },
     ],
   },
   {
-    name: 'Klantenservice',
+    name: "Klantenservice",
     id: 5,
     submenus: [
       {
-        name: 'Contact',
-        link: 'contact',
+        name: "Contact",
+        link: "contact",
         id: 12,
-        img: '/example.jpg',
-        text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
+        img: "/example.jpg",
+        text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
       },
       {
-        name: 'Montage',
-        link: 'customer/montage',
+        name: "Montage",
+        link: "customer/montage",
         id: 13,
-        img: '/example.jpg',
-        text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
+        img: "/example.jpg",
+        text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
       },
       {
-        name: 'Vaakgestelde vragen en antwoorden',
-        link: 'customer/vaakgestelde-vragen-en-antworden',
+        name: "Vaakgestelde vragen en antwoorden",
+        link: "customer/vaakgestelde-vragen-en-antworden",
         id: 14,
-        img: '/example.jpg',
-        text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
+        img: "/example.jpg",
+        text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
       },
     ],
   },
