@@ -2,6 +2,7 @@ import { Box, Container, Grid, Typography } from "@mui/material";
 import { products } from "../../lib/producthero/constants";
 import ProductDetailImageCarousel from "../../component/productDetail/ProductDetailImageCarousel";
 import ProductDetailCard from "../../component/productDetail/ProductDetailCard";
+import ProductDetailColorCard from "../../component/productDetail/ProductDetailColorCard";
 
 export const getData = async (slug: string) => {
   const res = await products.find((product) => product.code === slug);
@@ -20,7 +21,7 @@ async function ProductDetailPage({ params }: { params: { slug: string } }) {
     <Container maxWidth="xl" sx={{ py: 4 }}>
       <Grid container spacing={4}>
         <Grid item xs={12} sm={6}>
-          <ProductDetailImageCarousel images={product.images} />
+          <ProductDetailImageCarousel productColors={product.colors} />
         </Grid>
         <Grid item xs={12} sm={6}>
           <Typography variant="h4" mt={2}>
@@ -41,8 +42,16 @@ async function ProductDetailPage({ params }: { params: { slug: string } }) {
               ))}
             </Box>
           </Box>
-          <Box>
-            <Box></Box>
+          <Box my={2}>
+            <Typography variant="subtitle2">Kleuren:</Typography>
+            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, my: 1 }}>
+              {product.colors.map((colorItem) => (
+                <ProductDetailColorCard
+                  productColor={colorItem}
+                  key={colorItem.name}
+                />
+              ))}
+            </Box>
           </Box>
         </Grid>
       </Grid>

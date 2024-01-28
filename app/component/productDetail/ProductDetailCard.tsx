@@ -17,7 +17,9 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
   const isSelected = pathname.includes(product.code);
 
   return (
-    <Link href={`/product/${product.code}`}>
+    <Link
+      href={`/product/${product.code}?color=${product.productMainImage.name}`}
+    >
       <Card
         sx={{
           display: "flex",
