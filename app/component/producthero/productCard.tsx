@@ -50,9 +50,6 @@ export default function ProductCard({
 
           <Stack ml={5}>
             <Typography color={'white'}>{selectedProductImage.name}</Typography>
-            <Typography color={'#ddd'} variant="caption">
-              {selectedProductImage.price} €
-            </Typography>
           </Stack>
         </>
       )}

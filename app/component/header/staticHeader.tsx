@@ -1,16 +1,16 @@
 'use client';
-import { Stack, Typography } from '@mui/material';
+import { Stack, Typography, useMediaQuery } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
 import { staticHeaderData } from './constant';
-import { useEffect, useState } from 'react';
 
 function StaticHeader() {
+  const smallScreen = useMediaQuery('(max-width:600px)');
   return (
     <Stack
       direction={'row'}
       alignItems={'center'}
       justifyContent={'center'}
-      spacing={4}
+      spacing={smallScreen ? 1 : 4}
       sx={{ backgroundColor: '#F5F5F7' }}
       p={1}
     >
