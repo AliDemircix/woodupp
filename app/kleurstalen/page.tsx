@@ -30,7 +30,7 @@ const Index = () => {
             <Grid container justifyContent={'center'}>
                 <Stack
                     sx={{
-                        backgroundColor: '#f0f0f0',
+                        backgroundColor: '#f5f5f7',
                         borderRadius: '100px',
                         boxSizing: 'border-box',
                         padding: smallScreen ? '5px' : '8px 12px',
@@ -63,7 +63,7 @@ const Index = () => {
             <Grid container justifyContent={'center'}>
                 <Grid container xs={10} justifyContent="center" alignItems="center">
                     <Grid container direction={'column'} alignItems="center" gap={10} xs={12} md={6} pb={2} sx={{ backgroundColor: '#f7f7f7', height: 530 }}>
-                        <Typography variant={'h3'} mt={6}>
+                        <Typography variant={'h5'} mt={6}>
                             Verzoek kleurstalen
                         </Typography>
                         <Grid container justifyContent={'center'} alignItems={'center'} direction={'column'} style={{ flexGrow: 1 }}>
@@ -92,19 +92,28 @@ const Index = () => {
                             )}
                         </Grid>
                         {selectedProductCount > 0 && (
-                            <Button variant={'contained'} sx={{ textTransform: 'none', padding: '12px 16px', borderRadius: 10 }}>
-                                <Typography variant="h4">Verzoek kleurstalen</Typography>
+                            <Button
+                                variant={'contained'}
+                                sx={{
+                                    textTransform: 'none',
+                                    padding: '12px 16px',
+                                    borderRadius: 10,
+                                    background: 'darkgray',
+                                    '&:hover': {
+                                        backgroundColor: '#524e4e',
+                                    },
+                                }}
+                            >
+                                <Typography variant="h5" fontWeight={'bold'} fontSize={14}>
+                                    Verzoek kleurstalen
+                                </Typography>
                             </Button>
                         )}
                     </Grid>
                     <Grid item alignItems={'space-between'} xs={12} md={6} pl={3} sx={{ backgroundColor: '#white' }}>
                         <Grid container justifyContent={'space-between'} mb={2}>
-                            <Typography variant="h5" fontWeight={'bold'}>
-                                Kleurstalen
-                            </Typography>
-                            <Typography variant="h5" fontWeight={'bold'}>
-                                {selectedProductCount} geselecteerde kleuren
-                            </Typography>
+                            <Typography variant="h5">Kleurstalen</Typography>
+                            <Typography variant="h5">{selectedProductCount} geselecteerde kleuren</Typography>
                         </Grid>
 
                         <Grid container direction="column" gap={1} justifyContent={'end'}>
@@ -114,7 +123,7 @@ const Index = () => {
                                         backdropFilter: 'blur(30px)',
                                         borderRadius: '15px',
                                         padding: '2px',
-                                        backgroundColor: '#f7f7f7',
+                                        backgroundColor: '#f5f5f7',
                                         '&:hover': {
                                             cursor: 'pointer',
                                         },
