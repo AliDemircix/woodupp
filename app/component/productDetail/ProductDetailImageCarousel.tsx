@@ -1,37 +1,53 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { Box, Button, IconButton, Slide, Typography } from '@mui/material';
-import Image from 'next/image';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { theme } from '../../theme/theme';
+import React, { useEffect, useState } from "react";
+import { Box, Button, IconButton, Slide, Typography } from "@mui/material";
+import Image from "next/image";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import { theme } from "../../theme/theme";
+import { useSearchParams } from "next/navigation";
 
 interface ProductDetailImageCarouselProps {
-  images: string[];
+  productColors: {
+    name: string;
+    mainColorImage: string;
+    colorSamples: string[];
+  }[];
 }
 
 const ProductDetailImageCarousel: React.FC<ProductDetailImageCarouselProps> = ({
-  images,
+  productColors,
 }) => {
+  const searchParams = useSearchParams();
+  const colorFromQuery = searchParams.get("color");
+
+  const images = productColors?.find(
+    (productColor) => productColor.name === colorFromQuery
+  )?.colorSamples;
+
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [direction, setDirection] = useState<'right' | 'left' | 'up' | 'down'>(
-    'right',
+  const [direction, setDirection] = useState<"right" | "left" | "up" | "down">(
+    "right"
   );
 
   const handleBack = () => {
-    setDirection('left');
+    setDirection("left");
     setCurrentSlide((prevSlide) => Math.max(prevSlide - 1, 0));
   };
 
   const handleForward = () => {
-    setDirection('right');
-    setCurrentSlide((prevSlide) => Math.min(prevSlide + 1, images.length - 1));
+    setDirection("right");
+    setCurrentSlide((prevSlide) => Math.min(prevSlide + 1, images?.length - 1));
   };
+
+  useEffect(() => {
+    setCurrentSlide(0);
+  }, [colorFromQuery]);
 
   return (
     <Box position="relative" overflow="hidden" height={400} borderRadius={4}>
-      {images.map((image, index) => (
+      {images?.map((image, index) => (
         <Slide
           key={index}
           in={currentSlide === index}
@@ -53,13 +69,13 @@ const ProductDetailImageCarousel: React.FC<ProductDetailImageCarouselProps> = ({
         <Typography
           variant="body2"
           sx={{
-            display: 'inline-block',
+            display: "inline-block",
             padding: theme.spacing(0.5, 1),
             borderRadius: 16,
-            backgroundColor: 'white',
+            backgroundColor: "white",
           }}
         >
-          {currentSlide + 1} / {images.length}
+          {currentSlide + 1} / {images?.length}
         </Typography>
       </Box>
       {currentSlide !== 0 && (
@@ -67,14 +83,14 @@ const ProductDetailImageCarousel: React.FC<ProductDetailImageCarouselProps> = ({
           onClick={handleBack}
           aria-label="back"
           sx={{
-            position: 'absolute',
-            top: '50%',
+            position: "absolute",
+            top: "50%",
             left: 10,
-            backgroundColor: 'white',
+            backgroundColor: "white",
             opacity: 0.9,
 
-            '&:hover': {
-              backgroundColor: 'white',
+            "&:hover": {
+              backgroundColor: "white",
               opacity: 0.9,
             },
           }}
@@ -83,19 +99,19 @@ const ProductDetailImageCarousel: React.FC<ProductDetailImageCarouselProps> = ({
         </IconButton>
       )}
 
-      {currentSlide !== images.length - 1 && (
+      {currentSlide !== images?.length - 1 && (
         <IconButton
           onClick={handleForward}
           aria-label="back"
           sx={{
-            position: 'absolute',
-            top: '50%',
+            position: "absolute",
+            top: "50%",
             right: 10,
-            backgroundColor: 'white',
+            backgroundColor: "white",
             opacity: 0.9,
 
-            '&:hover': {
-              backgroundColor: 'white',
+            "&:hover": {
+              backgroundColor: "white",
               opacity: 0.9,
             },
           }}

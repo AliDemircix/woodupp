@@ -17,7 +17,9 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
   const isSelected = pathname.includes(product.code);
 
   return (
-    <Link href={`/product/${product.code}`}>
+    <Link
+      href={`/product/${product.code}?color=${product.productMainImage.name}`}
+    >
       <Card
         sx={{
           display: "flex",
@@ -32,7 +34,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
         <CardMedia
           component="img"
           sx={{ width: 73, height: 73 }}
-          image={product.images[0]} // Need to grab it from product's main(showcase) image
+          image={product.productMainImage.link}
           alt={product.name}
         />
 
@@ -43,16 +45,12 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
           }}
         >
           <Typography variant="h6">{product.name}</Typography>
-          {/*   We should get width/height and depth values from product data  */}
           <Typography variant="body2">
-            Elk paneel heeft een afmeting van 300 x 60 x 2.2 cm (1.8 m2)
-          </Typography>
-          {/* Get this price from product data */}
-          <Typography variant="body2">
-            Vanaf:{" "}
-            <Typography variant="body1" component="span">
-              110 €
-            </Typography>{" "}
+            Elk paneel heeft een afmeting van {product.dimensions.width} x{" "}
+            {product.dimensions.height} x {product.dimensions.depth} cm (
+            {(product.dimensions.width / 100) *
+              (product.dimensions.height / 100)}{" "}
+            m2)
           </Typography>
         </Box>
       </Card>

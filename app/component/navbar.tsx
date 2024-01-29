@@ -1,3 +1,4 @@
+
 'use client';
 import { useState } from 'react';
 import * as React from 'react';
@@ -116,13 +117,13 @@ export default function Navbar() {
         [key: string]: boolean;
     }>(initialMenu1Open);
 
+
     const openOption = Object.keys(isMenu1Open).find((key) => isMenu1Open[key]);
-
     const [hoveredElementId, setHoveredElementId] = useState<number | undefined>(undefined);
-
     const handleClose = () => setOpen(false);
     const isBigScreen = useMediaQuery('(min-width: 1500px)');
     const isMobile = useMediaQuery('(max-width: 900px)');
+  
     return (
         <Box
             sx={{
@@ -256,9 +257,16 @@ type SubMenu = {
     text: string;
 };
 type Option = {
+
+  name: string;
+  id: number;
+  submenus?: {
     name: string;
     id: number;
-    submenus?: { name: string; id: number; link: string; img: string }[];
+    mainColorName?: string;
+    link: string;
+    img: string;
+  }[];
 };
 
 type Menu1Props = {
@@ -275,9 +283,9 @@ type MobileMenu1Props = {
 };
 
 const Menu1 = (props: Menu1Props) => {
-    const { open, setIsMenu1Open } = props;
-    const classes = useStyles();
-    const handleButtonClick = (optionName: string) => {
+const { open, setIsMenu1Open } = props;
+const classes = useStyles();
+const handleButtonClick = (optionName: string) => {
         setIsMenu1Open((prevOpen) => ({
             ...Object.fromEntries(Object.entries(prevOpen).map(([key]) => [key, false])),
             [optionName]: !prevOpen[optionName],
@@ -369,24 +377,34 @@ const Menu2 = (props: Menu2Props) => {
         setIsHovered(undefined);
     };
 
-    return (
-        <div className={classes.menu2}>
-            {option?.submenus?.map((submenu) => (
-                <div
-                    key={submenu.id}
-                    onMouseEnter={() => handleMouseEnter(submenu.id)}
-                    onMouseLeave={handleMouseLeave}
-                    onClick={() => {
-                        setOpen(!open);
-                    }}
-                >
-                    <Link className={classes.menu1buttons} href={`/${submenu.link}`}>
-                        <Typography variant="h6" fontWeight={400} noWrap style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                            {submenu.name}
-                        </Typography>
-                    </Link>
-                </div>
-            ))}
+  return (
+    <div className={classes.menu2}>
+      {option?.submenus?.map((submenu) => (
+        <div
+          key={submenu.id}
+          onMouseEnter={() => handleMouseEnter(submenu.id)}
+          onMouseLeave={handleMouseLeave}
+          onClick={() => {
+            setOpen(!open);
+          }}
+        >
+          <Link
+            className={classes.menu1buttons}
+            href={
+              submenu.id === 1 || submenu.id === 2
+                ? `/${submenu.link}?color=${submenu.mainColorName}`
+                : `/${submenu.link}`
+            }
+          >
+            <Typography
+              variant="h6"
+              fontWeight={400}
+              noWrap
+              style={{ overflow: "hidden", textOverflow: "ellipsis" }}
+            >
+              {submenu.name}
+            </Typography>
+          </Link>
         </div>
     );
 };
@@ -395,22 +413,32 @@ const Menu2Mobile = (props: Menu2MobileProps) => {
     const classes = useStyles();
     const { option, setOpen, open } = props;
 
-    return (
-        <div className={classes.menu2Mobile}>
-            {option?.submenus?.map((submenu) => (
-                <div
-                    key={submenu.id}
-                    onClick={() => {
-                        setOpen(!open);
-                    }}
-                >
-                    <Link className={classes.menu1buttons} href={`/${submenu.link}`}>
-                        <Typography variant="body1" fontWeight={400} noWrap style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                            {submenu.name}
-                        </Typography>
-                    </Link>
-                </div>
-            ))}
+  return (
+    <div className={classes.menu2Mobile}>
+      {option?.submenus?.map((submenu) => (
+        <div
+          key={submenu.id}
+          onClick={() => {
+            setOpen(!open);
+          }}
+        >
+          <Link
+            className={classes.menu1buttons}
+            href={
+              submenu.id === 1 || submenu.id === 2
+                ? `/${submenu.link}?color=${submenu.mainColorName}`
+                : `/${submenu.link}`
+            }
+          >
+            <Typography
+              variant="body1"
+              fontWeight={400}
+              noWrap
+              style={{ overflow: "hidden", textOverflow: "ellipsis" }}
+            >
+              {submenu.name}
+            </Typography>
+          </Link>
         </div>
     );
 };
@@ -430,157 +458,172 @@ const Menu3 = (props: Menu3Props) => {
         setIsHovered(undefined);
     };
 
-    const classes = useStyles();
-    const findSubmenuById = (submenuId: number | undefined): SubMenu | undefined => {
-        for (const option of options) {
-            const foundSubmenu = option.submenus.find((submenu) => submenu.id === submenuId);
-            if (foundSubmenu) {
-                return foundSubmenu;
-            }
-        }
-        return undefined; // Return undefined if no submenu is found
-    };
-    const subMenu = findSubmenuById(subMenuId);
-    return (
-        <>
-            {subMenuId && (
-                <div className={classes.menu3} onMouseEnter={() => handleMouseEnter(subMenuId)} onMouseLeave={handleMouseLeave}>
-                    <Image src={subMenu?.img || '/default.jpg'} alt={subMenu?.name || '/default'} width={450} height={450} />
-                    <Typography variant="h6">{subMenu?.name}</Typography>
-                    <Typography variant="body1">{subMenu?.text}</Typography>
-                </div>
-            )}
-        </>
-    );
+  const classes = useStyles();
+  const findSubmenuById = (
+    submenuId: number | undefined
+  ): SubMenu | undefined => {
+    for (const option of options) {
+      const foundSubmenu = option.submenus.find(
+        (submenu) => submenu.id === submenuId
+      );
+      if (foundSubmenu) {
+        return foundSubmenu;
+      }
+    }
+    return undefined; // Return undefined if no submenu is found
+  };
+  const subMenu = findSubmenuById(subMenuId);
+  return (
+    <>
+      {subMenuId && (
+        <div
+          className={classes.menu3}
+          onMouseEnter={() => handleMouseEnter(subMenuId)}
+          onMouseLeave={handleMouseLeave}
+        >
+          <Image
+            src={subMenu?.img || "/default.jpg"}
+            alt={subMenu?.name || "/default"}
+            width={450}
+            height={450}
+          />
+          <Typography variant="h6">{subMenu?.name}</Typography>
+          <Typography variant="body1">{subMenu?.text}</Typography>
+        </div>
+      )}
+    </>
+  );
 };
 
 const options = [
-    {
-        name: 'Akupanelen',
+  {
+    name: "Akupanelen",
+    id: 1,
+    submenus: [
+      {
+        name: "Akupanel 240*60",
+        link: "product/akupanel-240",
+        mainColorName: "copper-oxide",
         id: 1,
-        submenus: [
-            {
-                name: 'Akupanel 240*60',
-                link: 'product/akupanel-240',
-                id: 1,
-                img: '/example.jpg',
-                text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
-            },
-            {
-                name: 'Akupanel 300*60',
-                link: 'product/akupanel-300',
-                id: 2,
-                img: '/example.jpg',
-                text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
-            },
-            {
-                name: 'Eindlaat',
-                link: 'eindlaat',
-                id: 3,
-                img: '/example.jpg',
-                text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
-            },
-            {
-                name: 'Kleurstalen',
-                link: 'kleurstalen',
-                id: 4,
-                img: '/example.jpg',
-                text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
-            },
-        ],
-    },
-    {
-        name: 'Inspiratie',
+        img: "/example.jpg",
+        text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
+      },
+      {
+        name: "Akupanel 300*60",
+        link: "product/akupanel-300",
+        mainColorName: "grey-oxide",
         id: 2,
-        submenus: [
-            {
-                name: 'Woonkamer',
-                link: 'wonkamer',
-                id: 5,
-                img: '/example.jpg',
-                text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
-            },
-            {
-                name: 'Keuken',
-                link: 'keuken',
-                id: 6,
-                img: '/example.jpg',
-                text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
-            },
-            {
-                name: 'Slaapkamer',
-                link: 'slaapkamer',
-                id: 7,
-                img: '/example.jpg',
-                text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
-            },
-            {
-                name: 'Kantoor',
-                link: 'kantoor',
-                id: 8,
-                img: '/example.jpg',
-                text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
-            },
-            {
-                name: 'Gang/Hal',
-                link: 'gang-hal',
-                id: 9,
-                img: '/example.jpg',
-                text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
-            },
-        ],
-    },
-    {
-        name: 'Samples',
+        img: "/example.jpg",
+        text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
+      },
+      {
+        name: "Eindlaat",
+        link: "eindlaat",
         id: 3,
-        submenus: [
-            {
-                name: 'Samples',
-                link: 'samples',
-                id: 10,
-                img: '/example.jpg',
-                text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
-            },
-        ],
-    },
-    {
-        name: 'Offerte Opvragen',
+        img: "/example.jpg",
+        text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
+      },
+      {
+        name: "Kleurstalen",
+        link: "kleurstalen",
         id: 4,
-        submenus: [
-            {
-                name: 'Offerte Opvragen',
-                link: 'offerte-opvragen',
-                id: 11,
-                img: '/example.jpg',
-                text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
-            },
-        ],
-    },
-    {
-        name: 'Klantenservice',
+        img: "/example.jpg",
+        text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
+      },
+    ],
+  },
+  {
+    name: "Inspiratie",
+    id: 2,
+    submenus: [
+      {
+        name: "Woonkamer",
+        link: "wonkamer",
         id: 5,
-        submenus: [
-            {
-                name: 'Contact',
-                link: 'contact',
-                id: 12,
-                img: '/example.jpg',
-                text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
-            },
-            {
-                name: 'Montage',
-                link: 'customer/montage',
-                id: 13,
-                img: '/example.jpg',
-                text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
-            },
-            {
-                name: 'Vaakgestelde vragen en antwoorden',
-                link: 'customer/vaakgestelde-vragen-en-antworden',
-                id: 14,
-                img: '/example.jpg',
-                text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
-            },
-        ],
-    },
+        img: "/example.jpg",
+        text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
+      },
+      {
+        name: "Keuken",
+        link: "keuken",
+        id: 6,
+        img: "/example.jpg",
+        text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
+      },
+      {
+        name: "Slaapkamer",
+        link: "slaapkamer",
+        id: 7,
+        img: "/example.jpg",
+        text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
+      },
+      {
+        name: "Kantoor",
+        link: "kantoor",
+        id: 8,
+        img: "/example.jpg",
+        text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
+      },
+      {
+        name: "Gang/Hal",
+        link: "gang-hal",
+        id: 9,
+        img: "/example.jpg",
+        text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
+      },
+    ],
+  },
+  {
+    name: "Samples",
+    id: 3,
+    submenus: [
+      {
+        name: "Samples",
+        link: "samples",
+        id: 10,
+        img: "/example.jpg",
+        text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
+      },
+    ],
+  },
+  {
+    name: "Offerte Opvragen",
+    id: 4,
+    submenus: [
+      {
+        name: "Offerte Opvragen",
+        link: "offerte-opvragen",
+        id: 11,
+        img: "/example.jpg",
+        text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
+      },
+    ],
+  },
+  {
+    name: "Klantenservice",
+    id: 5,
+    submenus: [
+      {
+        name: "Contact",
+        link: "contact",
+        id: 12,
+        img: "/example.jpg",
+        text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
+      },
+      {
+        name: "Montage",
+        link: "customer/montage",
+        id: 13,
+        img: "/example.jpg",
+        text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
+      },
+      {
+        name: "Vaakgestelde vragen en antwoorden",
+        link: "customer/vaakgestelde-vragen-en-antworden",
+        id: 14,
+        img: "/example.jpg",
+        text: "Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.",
+      },
+    ],
+  },
 ];

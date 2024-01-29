@@ -43,14 +43,11 @@ export default function ProductCard({ selectedProductDetails, selectedSmallImage
                         }}
                     />
 
-                    <Stack ml={5}>
-                        <Typography color={'white'}>{selectedProductImage.name}</Typography>
-                        <Typography color={'#ddd'} variant="caption">
-                            {selectedProductImage.price} €
-                        </Typography>
-                    </Stack>
-                </>
-            )}
-        </Stack>
-    );
+          <Stack ml={5}>
+            <Typography color={'white'}>{selectedProductImage.name}</Typography>
+          </Stack>
+        </>
+      )}
+    </Stack>
+  );
 }
