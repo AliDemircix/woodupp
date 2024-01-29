@@ -6,6 +6,7 @@ import { products } from '../lib/producthero/constants';
 import Image from 'next/image';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import { light } from '@mui/material/styles/createPalette';
 
 const Index = () => {
     const smallScreen = useMediaQuery('(max-width:600px)');
@@ -23,7 +24,7 @@ const Index = () => {
     return (
         <Grid container justifyContent={'center'} gap={5} mt={5}>
             <h1>Kleurstalen</h1>
-            <h3>
+            <h3 style={{ fontWeight: '300', fontSize: '17px' }}>
                 Met onze kleurstalen kun je de kleur en textuur van de panelen zelf ervaren voordat je een definitieve beslissing neemt. Bestel vandaag nog jouw
                 kleurstalen en ontdek jouw ideale match!
             </h3>
@@ -113,7 +114,7 @@ const Index = () => {
                     <Grid item alignItems={'space-between'} xs={12} md={6} pl={3} sx={{ backgroundColor: '#white' }}>
                         <Grid container justifyContent={'space-between'} mb={2}>
                             <Typography variant="h5">Kleurstalen</Typography>
-                            <Typography variant="h5">{selectedProductCount} geselecteerde kleuren</Typography>
+                            <Typography variant="body1">{selectedProductCount} geselecteerde kleuren</Typography>
                         </Grid>
 
                         <Grid container direction="column" gap={1} justifyContent={'end'}>
