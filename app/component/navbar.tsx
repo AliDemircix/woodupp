@@ -582,14 +582,14 @@ const options = [
             },
             {
                 name: 'Montage',
-                link: 'customer/montage',
+                link: 'montage',
                 id: 13,
                 img: '/example.jpg',
                 text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
             },
             {
                 name: 'Vaakgestelde vragen en antwoorden',
-                link: 'customer/vaakgestelde-vragen-en-antworden',
+                link: 'faq',
                 id: 14,
                 img: '/example.jpg',
                 text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
