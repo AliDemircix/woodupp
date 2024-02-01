@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { Grid, IconButton, Stack, Typography, Button } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { products } from '../lib/producthero/constants';
@@ -8,6 +8,22 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 const Index = () => {
+    const [message, setMessage] = useState('');
+
+    const sendMail = async (e: React.MouseEvent) => {
+        e.preventDefault();
+
+        const response = await fetch('/api/sendEmail', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify({
+                message,
+            }),
+        });
+    };
+
     const smallScreen = useMediaQuery('(max-width:600px)');
     const [selectedCategory, setSelectedCategory] = React.useState(products[0].id);
     const image = '/kluerstalen.jpg.webp';
@@ -103,6 +119,7 @@ const Index = () => {
                                         backgroundColor: '#524e4e',
                                     },
                                 }}
+                                onClick={sendMail}
                             >
                                 <Typography variant="h5" fontWeight={'bold'} fontSize={14}>
                                     Verzoek kleurstalen
