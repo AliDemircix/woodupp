@@ -1,12 +1,12 @@
 {
   "name": "woodupp",
   "version": "0.1.0",
-  "homepage": "https://woodupp.ademircix.com",
+  "homepage": "https://ademircix.com",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "NODE_ENV=production node server.js",
     "lint": "next lint"
   },
   "dependencies": {

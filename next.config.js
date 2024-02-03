@@ -1,18 +1,11 @@
-//Local
-// /** @type {import('next').NextConfig} */
-// const nextConfig = {}
-
-// module.exports = nextConfig
-//Deployed
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    basePath: '/woodupp',
+    trailingSlash: true,
     images: {
         unoptimized: true,
     },
 };
 
-module.exports = nextConfig;
-
 const withVideos = require('next-videos');
-
-module.exports = withVideos();
+module.exports = withVideos(nextConfig);
