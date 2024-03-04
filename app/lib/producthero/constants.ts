@@ -110,7 +110,7 @@ export const products: Product[] = [
     },
     {
         id: 2,
-        name: 'Akupanel | 300 Klassiek Eiken',
+        name: 'Akupanel | 300',
         code: 'akupanel-300',
         description: {
             productInfo:
@@ -194,7 +194,7 @@ export const middleHeroData = [
         id: 'hero1',
         title: 'De Opmetingen',
         img: {
-            src: '/pr1.jpg',
+            src: '/pr1.png',
             alt: 'opbouw paneel',
         },
         content: [
