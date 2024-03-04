@@ -3,6 +3,7 @@ import { products } from '../../lib/producthero/constants';
 import ProductDetailImageCarousel from '../../component/productDetail/ProductDetailImageCarousel';
 import ProductDetailCard from '../../component/productDetail/ProductDetailCard';
 import ProductDetailColorCard from '../../component/productDetail/ProductDetailColorCard';
+import ProductInfoSection from '../../component/productDetail/ProductInfoSection';
 
 export const getData = async (slug: string) => {
     const res = await products.find((product) => product.code === slug);
@@ -46,6 +47,7 @@ async function ProductDetailPage({ params }: { params: { slug: string } }) {
                             ))}
                         </Box>
                     </Box>
+                    <ProductInfoSection description={product.description} />
                 </Grid>
             </Grid>
         </Container>

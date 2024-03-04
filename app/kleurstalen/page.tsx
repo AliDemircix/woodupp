@@ -6,6 +6,7 @@ import { products } from '../lib/producthero/constants';
 import Image from 'next/image';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import SendMailDialog from './SendMailDialog';
 
 const Index = () => {
     const smallScreen = useMediaQuery('(max-width:600px)');
@@ -19,6 +20,16 @@ const Index = () => {
     }, {});
     const [selectedProducts, setSelectedProducts] = React.useState(initialState);
     const selectedProductCount = Object.values(selectedProducts).filter((p) => p).length;
+    const [open, setOpen] = React.useState(false);
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+    const handleClose = (value: string) => {
+        setOpen(false);
+    };
+    const selectedProductNames = products.map((product) => {
+        return product.thumbnailImages.filter((p) => selectedProducts[p.id]).map((p) => p.name);
+    });
 
     return (
         <Grid container justifyContent={'center'} gap={5} mt={5}>
@@ -92,22 +103,26 @@ const Index = () => {
                             )}
                         </Grid>
                         {selectedProductCount > 0 && (
-                            <Button
-                                variant={'contained'}
-                                sx={{
-                                    textTransform: 'none',
-                                    padding: '12px 16px',
-                                    borderRadius: 10,
-                                    background: 'darkgray',
-                                    '&:hover': {
-                                        backgroundColor: '#524e4e',
-                                    },
-                                }}
-                            >
-                                <Typography variant="h5" fontWeight={'bold'} fontSize={14}>
-                                    Verzoek kleurstalen
-                                </Typography>
-                            </Button>
+                            <>
+                                <Button
+                                    variant={'contained'}
+                                    sx={{
+                                        textTransform: 'none',
+                                        padding: '12px 16px',
+                                        borderRadius: 10,
+                                        background: 'darkgray',
+                                        '&:hover': {
+                                            backgroundColor: '#524e4e',
+                                        },
+                                    }}
+                                    onClick={handleClickOpen}
+                                >
+                                    <Typography variant="h5" fontWeight={'bold'} fontSize={14}>
+                                        Verzoek kleurstalen
+                                    </Typography>
+                                </Button>
+                                <SendMailDialog open={open} onClose={handleClose} selectedProductNames={selectedProductNames.flat()} />
+                            </>
                         )}
                     </Grid>
                     <Grid item alignItems={'space-between'} xs={12} md={6} pl={3} sx={{ backgroundColor: '#white' }}>

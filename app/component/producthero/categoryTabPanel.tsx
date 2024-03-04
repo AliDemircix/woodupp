@@ -26,10 +26,8 @@ export default function CategoryTabPanel({
                 boxSizing: 'border-box',
                 padding: smallScreen ? '5px' : '15px 20px',
                 position: 'absolute',
-                top: '50px',
+                top: '20px',
                 left: '20px',
-                right: '20px',
-                width: smallScreen ? '330px' : '420px',
             }}
             direction={'row'}
         >

@@ -9,12 +9,19 @@ export interface ProductImagesByColor {
     mainColorImage: string;
     colorSamples: string[];
 }
+
+export interface ProductDescription {
+    productInfo: string;
+    materialAndMaintenance: string;
+    sustainability: string;
+}
+
 export type Product = {
     id: number;
     name: string;
     code: string;
     dimensions: { width: number; height: number; depth: number };
-    description: string;
+    description: ProductDescription;
     images: string[];
     thumbnailImages: Thumbnail[];
     colors: ProductImagesByColor[];
@@ -25,10 +32,18 @@ export const products: Product[] = [
         id: 1,
         name: 'Akupanel | 240',
         code: 'akupanel-240',
-        description: '',
         productMainImage: {
             name: 'walnoot',
             link: '/TGSX-8003-walnoot-wood-1.jpg',
+        },
+
+        description: {
+            productInfo:
+                'Het Akupanel kan worden gebruikt om prachtige lamellenmuren en plafonds te creëren, wat een moderne uitstraling aan de kamer toevoegt. Het paneel dempt geluid en verwijdert galm in de kamer, wat de akoestiek aanzienlijk verbetert.',
+            materialAndMaintenance:
+                'The panels are made of sustainable materials. The acoustic felt is made of recycled plastic (PET bottles) and the slats are made of MDF with a veneer surface. The panels are easy to maintain. Clean it with a dustpan, vacuum cleaner or well-wrung cloth.',
+            sustainability:
+                'The felt is made from recycled plastic and all the wood we use comes from sustainable forestry. This allows the forest to reproduce more than it is cut down. We are proud to say that all our Aku panels are produced in Denmark using sustainable materials. Our goal is to produce high-quality and environmentally friendly panels that contribute to a healthier and more sustainable indoor climate.',
         },
         dimensions: { width: 240, height: 60, depth: 2.2 },
         colors: [
@@ -56,6 +71,16 @@ export const products: Product[] = [
                 name: 'zwart',
                 mainColorImage: '/TGSX-8010-zwart-1.jpg',
                 colorSamples: ['/TGSX-8010-zwart-1.jpg', '/TGSX-8010-zwart-2.jpg', '/TGSX-8010-zwart-3.jpg'],
+            },
+            {
+                name: 'charcoal',
+                mainColorImage: '/rustic-grey-oak-front-100x100.jpg',
+                colorSamples: [
+                    '/rustic-grey-oak-front-100x100.jpg',
+                    '/akupanel-grey-oxide-100x100.jpg.webp',
+                    '/akupanel-oxide-blue-showcase.jpg',
+                    '/akupanel-grey-oxide-showcase.jpg',
+                ],
             },
         ],
         images: [
@@ -98,7 +123,6 @@ export const products: Product[] = [
         id: 2,
         name: 'Akupanel | 300 Klassiek Eiken',
         code: 'akupanel-300',
-        description: '',
         dimensions: { width: 60, height: 60, depth: 2.2 },
         productMainImage: {
             name: 'walnoot',
@@ -166,6 +190,14 @@ export const products: Product[] = [
                 name: 'Akupanel | 60 – Klassiek Eiken (Zwart)',
             },
         ],
+        description: {
+            productInfo:
+                'Het Akupanel kan worden gebruikt om prachtige lamellenmuren en plafonds te creëren, wat een moderne uitstraling aan de kamer toevoegt. Het paneel dempt geluid en verwijdert galm in de kamer, wat de akoestiek aanzienlijk verbetert.',
+            materialAndMaintenance:
+                'The panels are made of sustainable materials. The acoustic felt is made of recycled plastic (PET bottles) and the slats are made of MDF with a veneer surface. The panels are easy to maintain. Clean it with a dustpan, vacuum cleaner or well-wrung cloth.',
+            sustainability:
+                'The felt is made from recycled plastic and all the wood we use comes from sustainable forestry. This allows the forest to reproduce more than it is cut down. We are proud to say that all our Aku panels are produced in Denmark using sustainable materials. Our goal is to produce high-quality and environmentally friendly panels that contribute to a healthier and more sustainable indoor climate.',
+        },
     },
 ];
 export const middleHeroData = [
@@ -173,7 +205,7 @@ export const middleHeroData = [
         id: 'hero1',
         title: 'De Opmetingen',
         img: {
-            src: '/pr1.jpg',
+            src: '/pr1.png',
             alt: 'opbouw paneel',
         },
         content: [
@@ -195,4 +227,10 @@ export const middleHeroData = [
         },
         content: ['Duurzame materialen', 'Gereeyeled vilt', 'Geluidsabsorerend (%85)', 'Goede kwaliteit', 'Betere akoestiek'],
     },
+];
+
+export const productDescriptionTitles = [
+    { productInfo: 'Productinformatie' },
+    { materialAndMaintenance: ' Materiaal en onderhoud' },
+    { sustainability: 'Duurzaamheid' },
 ];
