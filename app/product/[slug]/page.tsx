@@ -41,7 +41,7 @@ async function ProductDetailPage({ params }: { params: { slug: string } }) {
                     </Box>
                     <Box my={2}>
                         <Typography variant="subtitle2">Kleuren:</Typography>
-                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, my: 1 }}>
+                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, my: 1 }}>
                             {product.colors.map((colorItem) => (
                                 <ProductDetailColorCard productColor={colorItem} key={colorItem.name} />
                             ))}

@@ -21,6 +21,8 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Link from 'next/link';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const useStyles = makeStyles((theme: Theme) => ({
     menu1buttons: {
@@ -117,7 +119,10 @@ export default function Navbar() {
 
     const openOption = Object.keys(isMenu1Open).find((key) => isMenu1Open[key]);
     const [hoveredElementId, setHoveredElementId] = useState<number | undefined>(undefined);
-    const handleClose = () => setOpen(false);
+    const handleClose = () => {
+        setOpen(false);
+        setHoveredElementId(undefined);
+    };
     const isBigScreen = useMediaQuery('(min-width: 1500px)');
     const isMobile = useMediaQuery('(max-width: 900px)');
 
@@ -155,7 +160,9 @@ export default function Navbar() {
                             },
                         }}
                         onClick={() => {
-                            setOpen(!open), setIsMenu1Open(initialMenu1Open);
+                            setOpen(!open);
+                            setIsMenu1Open(initialMenu1Open);
+                            setHoveredElementId(undefined);
                         }}
                     >
                         {open ? <CloseIcon /> : <MenuIcon />}
@@ -169,7 +176,7 @@ export default function Navbar() {
                         onClose={handleClose}
                         style={{
                             position: 'absolute',
-                            top: 100,
+                            top: 110,
                             left: 0,
                             margin: 0,
                             padding: 0,
@@ -216,13 +223,18 @@ export default function Navbar() {
                                             />
                                         )}
 
-                                        <Menu3 subMenuId={hoveredElementId} setIsHovered={setHoveredElementId} />
+                                        <Menu3
+                                            subMenuId={hoveredElementId}
+                                            setIsHovered={setHoveredElementId}
+                                            setOpen={setOpen}
+                                            option={options.find((option) => option.name === openOption)}
+                                        />
                                     </div>
                                 </div>
                             </div>
                         )}
                     </Dialog>
-                    <Link href="/" onClick={() => setOpen(false)}>
+                    <Link href="/" onClick={handleClose}>
                         <Typography variant="h4">ECD Wall Panel</Typography>
                     </Link>
                     <Link href="/kleurstalen">
@@ -232,7 +244,7 @@ export default function Navbar() {
                             color="inherit"
                             aria-label="menu"
                             sx={{ display: 'flex', gap: 1, '&:hover': { borderRadius: 10 } }}
-                            onClick={() => setOpen(false)}
+                            onClick={handleClose}
                         >
                             <TextureIcon fontSize="small" />
                             <Typography variant="body2" component="div" sx={{ flexGrow: 1 }}>
@@ -252,6 +264,7 @@ type SubMenu = {
     link: string;
     img: string;
     text: string;
+    mainColorName?: string;
 };
 
 type Option = {
@@ -294,10 +307,7 @@ const Menu1 = (props: Menu1Props) => {
             {options.map((option) => (
                 <Grid container key={option.id} direction="column" mb={2}>
                     <Button className={classes.menu1buttons} onClick={() => handleButtonClick(option.name)} disableRipple>
-                        <svg xmlns="http://www.w3.org/2000/svg" width={'40'} height={'40'} viewBox="0 0 160 160" className={classes.vertical}>
-                            <rect x="70" width="20" height="160" className={open[option.name as string] ? classes.transform : classes.vertical} />
-                            <rect y="70" width="160" height="20" />
-                        </svg>
+                        {open[option.name as string] ? <ExpandLessIcon fontSize="large" /> : <ExpandMoreIcon fontSize="large" />}
                         <Typography variant={'h4'}>{option.name}</Typography>
                     </Button>
                 </Grid>
@@ -385,14 +395,20 @@ const Menu2 = (props: Menu2Props) => {
                         setOpen(!open);
                     }}
                 >
-                    <Link
-                        className={classes.menu1buttons}
-                        href={submenu.id === 1 || submenu.id === 2 ? `/${submenu.link}?color=${submenu.mainColorName}` : `/${submenu.link}`}
-                    >
+                    {submenu.link ? (
+                        <Link
+                            className={classes.menu1buttons}
+                            href={submenu.id === 1 || submenu.id === 2 ? `/${submenu.link}?color=${submenu.mainColorName}` : `/${submenu.link}`}
+                        >
+                            <Typography variant="h6" fontWeight={400} noWrap style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                {submenu.name}
+                            </Typography>
+                        </Link>
+                    ) : (
                         <Typography variant="h6" fontWeight={400} noWrap style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
                             {submenu.name}
                         </Typography>
-                    </Link>
+                    )}
                 </div>
             ))}
         </div>
@@ -412,14 +428,20 @@ const Menu2Mobile = (props: Menu2MobileProps) => {
                         setOpen(!open);
                     }}
                 >
-                    <Link
-                        className={classes.menu1buttons}
-                        href={submenu.id === 1 || submenu.id === 2 ? `/${submenu.link}?color=${submenu.mainColorName}` : `/${submenu.link}`}
-                    >
-                        <Typography variant="body1" fontWeight={400} noWrap style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    {submenu.link ? (
+                        <Link
+                            className={classes.menu1buttons}
+                            href={submenu.id === 1 || submenu.id === 2 ? `/${submenu.link}?color=${submenu.mainColorName}` : `/${submenu.link}`}
+                        >
+                            <Typography variant="h6" fontWeight={400} noWrap style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                {submenu.name}
+                            </Typography>
+                        </Link>
+                    ) : (
+                        <Typography variant="h6" fontWeight={400} noWrap style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
                             {submenu.name}
                         </Typography>
-                    </Link>
+                    )}
                 </div>
             ))}
         </div>
@@ -429,10 +451,12 @@ const Menu2Mobile = (props: Menu2MobileProps) => {
 type Menu3Props = {
     subMenuId: number | undefined;
     setIsHovered: Dispatch<SetStateAction<number | undefined>>;
+    setOpen: Dispatch<SetStateAction<boolean>>;
+    option: Option | undefined;
 };
 
 const Menu3 = (props: Menu3Props) => {
-    const { subMenuId, setIsHovered } = props;
+    const { subMenuId, setIsHovered, setOpen, option } = props;
     const handleMouseEnter = (elementId: number | undefined) => {
         setIsHovered(elementId);
     };
@@ -452,13 +476,40 @@ const Menu3 = (props: Menu3Props) => {
         return undefined; // Return undefined if no submenu is found
     };
     const subMenu = findSubmenuById(subMenuId);
+    console.log(subMenu);
+
     return (
         <>
             {subMenuId && (
-                <div className={classes.menu3} onMouseEnter={() => handleMouseEnter(subMenuId)} onMouseLeave={handleMouseLeave}>
-                    <Image src={subMenu?.img || '/default.jpg'} alt={subMenu?.name || '/default'} width={450} height={450} />
-                    <Typography variant="h6">{subMenu?.name}</Typography>
-                    <Typography variant="body1">{subMenu?.text}</Typography>
+                <div
+                    className={classes.menu3}
+                    onMouseEnter={() => handleMouseEnter(subMenuId)}
+                    onMouseLeave={handleMouseLeave}
+                    onClick={() => {
+                        setOpen(!open);
+                    }}
+                >
+                    {subMenu?.link ? (
+                        <Link href={subMenuId === 1 || subMenuId === 2 ? `/${subMenu?.link}?color=${subMenu?.mainColorName}` : `/${subMenu?.link}`}>
+                            <Image src={subMenu?.img || '/default.jpg'} alt={subMenu?.name || '/default'} width={450} height={450} />
+                            {option?.name !== 'Klantenservice' && (
+                                <>
+                                    <Typography variant="h6">{subMenu?.name}</Typography>
+                                    <Typography variant="body1">{subMenu?.text}</Typography>
+                                </>
+                            )}
+                        </Link>
+                    ) : (
+                        <>
+                            <Image src={subMenu?.img || '/default.jpg'} alt={subMenu?.name || '/default'} width={450} height={450} />
+                            {option?.name !== 'Klantenservice' && (
+                                <>
+                                    <Typography variant="h6">{subMenu?.name}</Typography>
+                                    <Typography variant="body1">{subMenu?.text}</Typography>
+                                </>
+                            )}
+                        </>
+                    )}
                 </div>
             )}
         </>
@@ -471,17 +522,17 @@ const options = [
         id: 1,
         submenus: [
             {
-                name: 'Akupanel 240*60',
+                name: 'Akupanel 240',
                 link: 'product/akupanel-240',
-                mainColorName: 'copper-oxide',
+                mainColorName: 'walnoot',
                 id: 1,
                 img: '/example.jpg',
                 text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
             },
             {
-                name: 'Akupanel 300*60',
+                name: 'Akupanel 300',
                 link: 'product/akupanel-300',
-                mainColorName: 'grey-oxide',
+                mainColorName: 'walnoot',
                 id: 2,
                 img: '/example.jpg',
                 text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
@@ -549,10 +600,10 @@ const options = [
         submenus: [
             {
                 name: 'Samples',
-                link: 'samples',
+                link: '',
                 id: 10,
-                img: '/example.jpg',
-                text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
+                img: '/samples.jpg',
+                text: 'Geen tijd om naar de showroom te komen kijken? Of ben je te ver weg? Onze monsters zijn klaar voor verzending..!',
             },
         ],
     },
@@ -577,22 +628,22 @@ const options = [
                 name: 'Contact',
                 link: 'contact',
                 id: 12,
-                img: '/example.jpg',
-                text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
+                img: '/contact.png',
+                text: '',
             },
             {
                 name: 'Montage',
                 link: 'customer/montage',
                 id: 13,
-                img: '/example.jpg',
-                text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
+                img: '/montage.png',
+                text: '',
             },
             {
                 name: 'Vaakgestelde vragen en antwoorden',
                 link: 'customer/vaakgestelde-vragen-en-antworden',
                 id: 14,
-                img: '/example.jpg',
-                text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',
+                img: '/FAQ.png',
+                text: '',
             },
         ],
     },
