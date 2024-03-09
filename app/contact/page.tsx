@@ -1,6 +1,8 @@
-import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material';
+import { Box, Card, CardContent, CardMedia, Stack, Typography } from '@mui/material';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import Link from 'next/link';
 import React from 'react';
+import { address, email, weekendHours, weeklyHours, whatsapp } from '../lib/contact-info/constants';
 
 function ContactPage() {
     return (
@@ -34,27 +36,32 @@ function ContactPage() {
                             Openingstijden
                         </Typography>
                         <Typography variant="body1" mt={0.5}>
-                            Maandag t/m donderdag: 8.30 – 16.30 uur
+                            {weeklyHours}
                         </Typography>
-                        <Typography variant="body1" mb={2}>
-                            Vrijdag: 8.30 – 13.30 uur
+                        <Typography variant="body1" mt={0.5}>
+                            {weekendHours}
                         </Typography>
-                        <Typography variant="subtitle1" fontWeight="bold">
+                        <Typography variant="subtitle1" fontWeight="bold" mt={2}>
                             Contact
                         </Typography>
                         <Typography variant="body1" mt={0.5}>
                             EDC Wall Panel Nederland
                         </Typography>
-                        <Typography variant="body1">ABCStraat 00, 1111 AA te Amsterdam</Typography>
+                        <Typography variant="body1">{address}</Typography>
                         <Typography variant="body1" mt={0.5}>
-                            Telefoon: 088 888 8888
+                            Telefoon: {whatsapp}
                         </Typography>
                         <Typography variant="body1">
                             E-mail:{' '}
                             <Link href={`mailto:edcwallpanel@panel.nl`} target="_blank" style={{ textDecoration: 'underline' }}>
-                                edcwallpanel@panel.nl
+                                {email}
                             </Link>
                         </Typography>
+                        <Stack direction="row" alignItems="center" mt={3}>
+                            <Link href={'https://wa.me/' + whatsapp} target="_blank">
+                                <img src="/wp.png" alt="whatsapp contact" width="300px" />
+                            </Link>
+                        </Stack>
                     </CardContent>
                     <CardMedia
                         component="img"

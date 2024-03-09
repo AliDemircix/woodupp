@@ -66,5 +66,4 @@ export const constants = [
         ],
     },
     { id: 'montage', title: 'Montage' },
-    { id: 'contact', title: 'Contact' },
 ];

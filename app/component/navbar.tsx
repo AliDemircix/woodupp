@@ -23,6 +23,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Link from 'next/link';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { whatsapp } from '../lib/contact-info/constants';
 
 const useStyles = makeStyles((theme: Theme) => ({
     menu1buttons: {
@@ -386,31 +387,37 @@ const Menu2 = (props: Menu2Props) => {
 
     return (
         <div className={classes.menu2}>
-            {option?.submenus?.map((submenu) => (
-                <div
-                    key={submenu.id}
-                    onMouseEnter={() => handleMouseEnter(submenu.id)}
-                    onMouseLeave={handleMouseLeave}
-                    onClick={() => {
-                        setOpen(!open);
-                    }}
-                >
-                    {submenu.link ? (
-                        <Link
-                            className={classes.menu1buttons}
-                            href={submenu.id === 1 || submenu.id === 2 ? `/${submenu.link}?color=${submenu.mainColorName}` : `/${submenu.link}`}
-                        >
+            {option?.submenus?.map((submenu) => {
+                console.log(submenu.name);
+                let link;
+                if (submenu.name === 'Offerte Opvragen') {
+                    link = 'https://wa.me/' + whatsapp;
+                } else {
+                    link = submenu.id === 1 || submenu.id === 2 ? `/${submenu.link}?color=${submenu.mainColorName}` : `/${submenu.link}`;
+                }
+                return (
+                    <div
+                        key={submenu.id}
+                        onMouseEnter={() => handleMouseEnter(submenu.id)}
+                        onMouseLeave={handleMouseLeave}
+                        onClick={() => {
+                            setOpen(!open);
+                        }}
+                    >
+                        {submenu.link ? (
+                            <Link className={classes.menu1buttons} href={link}>
+                                <Typography variant="h6" fontWeight={400} noWrap style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                    {submenu.name}
+                                </Typography>
+                            </Link>
+                        ) : (
                             <Typography variant="h6" fontWeight={400} noWrap style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
                                 {submenu.name}
                             </Typography>
-                        </Link>
-                    ) : (
-                        <Typography variant="h6" fontWeight={400} noWrap style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                            {submenu.name}
-                        </Typography>
-                    )}
-                </div>
-            ))}
+                        )}
+                    </div>
+                );
+            })}
         </div>
     );
 };
@@ -421,29 +428,34 @@ const Menu2Mobile = (props: Menu2MobileProps) => {
 
     return (
         <div className={classes.menu2Mobile}>
-            {option?.submenus?.map((submenu) => (
-                <div
-                    key={submenu.id}
-                    onClick={() => {
-                        setOpen(!open);
-                    }}
-                >
-                    {submenu.link ? (
-                        <Link
-                            className={classes.menu1buttons}
-                            href={submenu.id === 1 || submenu.id === 2 ? `/${submenu.link}?color=${submenu.mainColorName}` : `/${submenu.link}`}
-                        >
+            {option?.submenus?.map((submenu) => {
+                let link;
+                if (submenu.name === 'Offerte Opvragen') {
+                    link = 'https://wa.me/' + whatsapp;
+                } else {
+                    link = submenu.id === 1 || submenu.id === 2 ? `/${submenu.link}?color=${submenu.mainColorName}` : `/${submenu.link}`;
+                }
+                return (
+                    <div
+                        key={submenu.id}
+                        onClick={() => {
+                            setOpen(!open);
+                        }}
+                    >
+                        {submenu.link ? (
+                            <Link className={classes.menu1buttons} href={link}>
+                                <Typography variant="h6" fontWeight={400} noWrap style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                    {submenu.name}
+                                </Typography>
+                            </Link>
+                        ) : (
                             <Typography variant="h6" fontWeight={400} noWrap style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
                                 {submenu.name}
                             </Typography>
-                        </Link>
-                    ) : (
-                        <Typography variant="h6" fontWeight={400} noWrap style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                            {submenu.name}
-                        </Typography>
-                    )}
-                </div>
-            ))}
+                        )}
+                    </div>
+                );
+            })}
         </div>
     );
 };
@@ -613,7 +625,7 @@ const options = [
         submenus: [
             {
                 name: 'Offerte Opvragen',
-                link: 'offerte-opvragen',
+                link: 'https://wa.me/0685257214',
                 id: 11,
                 img: '/example.jpg',
                 text: 'Ervaar de subtiele elegantie van Akupanel | 300, perfect geschikt voor ruime en open omgevingen. Dit 3-meter lange paneel verbetert zowel de akoestiek als de esthetiek in kamers met hoge plafonds, en belichaamt de essentie van Scandinavisch design.',

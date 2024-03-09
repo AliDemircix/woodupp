@@ -31,7 +31,6 @@ async function Faq({ params }: { params: { slug: string } }) {
                     </Stack>
                 )}
                 {params.slug === 'montage' && <MontagePage />}
-                {params.slug === 'contact' && <>Add Later contact Page</>}
             </Container>
         </div>
     );

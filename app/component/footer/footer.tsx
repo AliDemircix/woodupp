@@ -22,13 +22,9 @@ function Footer() {
                     <ListItem sx={{ fontWeight: 'bold' }}>{contact.tel}</ListItem>
                     <ListItem sx={{ fontWeight: 'bold' }}>{contact.email}</ListItem>
                     <ListItem>{contact.openTimes}</ListItem>
-                    <ListItem>
-                        <FacebookIcon />
-                        <InstagramIcon />
-                    </ListItem>
-                    <ListItem>
+                    {/* <ListItem>
                         <CountriesDrawer countries={contact.countries} />
-                    </ListItem>
+                    </ListItem> */}
                 </List>
             </Grid>
             <Grid item xs={12} sm={4}>
