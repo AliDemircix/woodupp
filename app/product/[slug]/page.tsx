@@ -1,11 +1,11 @@
 import { Box, Container, Grid, Typography } from '@mui/material';
-import { products } from '../../lib/producthero/constants';
+import { Product, products } from '../../lib/producthero/constants';
 import ProductDetailImageCarousel from '../../component/productDetail/ProductDetailImageCarousel';
 import ProductDetailCard from '../../component/productDetail/ProductDetailCard';
 import ProductDetailColorCard from '../../component/productDetail/ProductDetailColorCard';
 import ProductInfoSection from '../../component/productDetail/ProductInfoSection';
 
-export const getData = async (slug: string) => {
+async function getData(slug: string): Promise<Product> {
     const res = await products.find((product) => product.code === slug);
 
     if (!res) {
@@ -13,10 +13,10 @@ export const getData = async (slug: string) => {
     }
 
     return res;
-};
+}
 
 async function ProductDetailPage({ params }: { params: { slug: string } }) {
-    const product = await getData(params.slug);
+    const product: Product = await getData(params.slug);
 
     return (
         <Container maxWidth="xl" sx={{ py: 4 }}>

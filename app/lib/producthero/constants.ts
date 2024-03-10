@@ -69,8 +69,8 @@ export const products: Product[] = [
             },
             {
                 name: 'zwart',
-                mainColorImage: '/TGSX-8010-zwart-1.jpg',
-                colorSamples: ['/TGSX-8010-zwart-1.jpg', '/TGSX-8010-zwart-2.jpg', '/TGSX-8010-zwart-3.jpg'],
+                mainColorImage: '/TGSX-8010-zwart.jpg',
+                colorSamples: ['/TGSX-8010-zwart.jpg', '/TGSX-8010-zwart-2.jpg', '/TGSX-8010-zwart-3.jpg'],
             },
             {
                 name: 'charcoal',
@@ -114,7 +114,7 @@ export const products: Product[] = [
             },
             {
                 id: 'a5',
-                src: '/TGSX-8010-zwart-1.jpg',
+                src: '/TGSX-8010-zwart.jpg',
                 name: 'Akupanel | 240 – Klassiek Eiken (Zwart)',
             },
         ],
@@ -151,8 +151,8 @@ export const products: Product[] = [
             },
             {
                 name: 'zwart',
-                mainColorImage: '/TGSX-8010-zwart-1.jpg',
-                colorSamples: ['/TGSX-8010-zwart-1.jpg', '/TGSX-8010-zwart-2.jpg', '/TGSX-8010-zwart-3.jpg'],
+                mainColorImage: '/TGSX-8010-zwart.jpg',
+                colorSamples: ['/TGSX-8010-zwart.jpg', '/TGSX-8010-zwart-2.jpg', '/TGSX-8010-zwart-3.jpg'],
             },
         ],
         images: [
@@ -186,7 +186,7 @@ export const products: Product[] = [
             },
             {
                 id: 'b5',
-                src: '/TGSX-8010-zwart-1.jpg',
+                src: '/TGSX-8010-zwart.jpg',
                 name: 'Akupanel | 60 – Klassiek Eiken (Zwart)',
             },
         ],
