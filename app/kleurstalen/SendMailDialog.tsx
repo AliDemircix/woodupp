@@ -1,12 +1,10 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState, useEffect } from 'react';
 import Dialog from '@mui/material/Dialog';
 import { Button, TextField, Typography, Grid } from '@mui/material';
 
-const emails = ['username@gmail.com', 'user02@gmail.com'];
-
 export interface SimpleDialogProps {
     open: boolean;
-    onClose: (value: string) => void;
+    onClose: () => void;
     selectedProductNames: Array<string>;
 }
 
@@ -20,15 +18,24 @@ interface FormData {
 
 export default function SendMailDialog(props: SimpleDialogProps) {
     const { onClose, open, selectedProductNames } = props;
+
     const [formData, setFormData] = useState<FormData>({
         firstName: '',
         lastName: '',
         email: '',
         message: '',
-        kleurstalen: selectedProductNames.join(', '),
+        kleurstalen: '',
     });
 
     const [submitting, setSubmitting] = useState<boolean>(false);
+
+    useEffect(() => {
+        const productNames = selectedProductNames.join(', ');
+        setFormData((prevState) => ({
+            ...prevState,
+            kleurstalen: productNames,
+        }));
+    }, [selectedProductNames]);
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -60,7 +67,7 @@ export default function SendMailDialog(props: SimpleDialogProps) {
         } else if (error) {
             alert('Er is iets misgegaan, probeer het later opnieuw.');
         }
-
+        onClose();
         setSubmitting(false);
     };
 

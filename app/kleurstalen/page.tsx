@@ -24,7 +24,7 @@ const Index = () => {
     const handleClickOpen = () => {
         setOpen(true);
     };
-    const handleClose = (value: string) => {
+    const handleClose = () => {
         setOpen(false);
     };
     const selectedProductNames = products.map((product) => {
@@ -34,10 +34,6 @@ const Index = () => {
     return (
         <Grid container justifyContent={'center'} gap={5} mt={5}>
             <h1>Kleurstalen</h1>
-            <h3>
-                Met onze kleurstalen kun je de kleur en textuur van de panelen zelf ervaren voordat je een definitieve beslissing neemt. Bestel vandaag nog jouw
-                kleurstalen en ontdek jouw ideale match!
-            </h3>
             <Grid container justifyContent={'center'}>
                 <Stack
                     sx={{
@@ -45,7 +41,6 @@ const Index = () => {
                         borderRadius: '100px',
                         boxSizing: 'border-box',
                         padding: smallScreen ? '5px' : '8px 12px',
-                        width: smallScreen ? '330px' : '420px',
                     }}
                     direction={'row'}
                 >
@@ -53,7 +48,7 @@ const Index = () => {
                         return (
                             <Stack
                                 key={product.id}
-                                borderRadius="100px"
+                                borderRadius="40px"
                                 p={smallScreen ? 1 : 2}
                                 sx={{
                                     backgroundColor: selectedCategory === product.id ? 'white' : '',
@@ -61,7 +56,6 @@ const Index = () => {
                                     transition: 'all .9s',
                                 }}
                                 onClick={() => {
-                                    const selected = products.find((p) => p.id === product.id);
                                     setSelectedCategory(product.id);
                                 }}
                             >

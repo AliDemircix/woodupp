@@ -95,33 +95,33 @@ export const products: Product[] = [
             {
                 id: 'a1',
                 src: '/TGSX-8003-walnoot-wood-1.jpg',
-                name: 'Akupanel | 240 – Klassiek Wood (Walnoot)',
+                name: 'Akupanel | 240 – (Walnoot)',
             },
             {
                 id: 'a2',
                 src: '/TGSX-8019-geel-eiken-1.jpg',
-                name: 'Akupanel | 240 – Klassiek Eiken (Geel)',
+                name: 'Akupanel | 240 – (Geel)',
             },
             {
                 id: 'a3',
                 src: '/TGSX-8013-wit-eiken-1.jpg',
-                name: 'Akupanel | 240 – Klassiek Eiken (Wit)',
+                name: 'Akupanel | 240 – (Wit)',
             },
             {
                 id: 'a4',
                 src: '/TGSX-8005-zilver-1.jpg',
-                name: 'Akupanel | 240 – Klassiek Eiken (Zilver)',
+                name: 'Akupanel | 240 – (Zilver)',
             },
             {
                 id: 'a5',
                 src: '/TGSX-8010-zwart.jpg',
-                name: 'Akupanel | 240 – Klassiek Eiken (Zwart)',
+                name: 'Akupanel | 240 – (Zwart)',
             },
         ],
     },
     {
         id: 2,
-        name: 'Akupanel | 300 Klassiek Eiken',
+        name: 'Akupanel | 300 ',
         code: 'akupanel-300',
         dimensions: { width: 60, height: 60, depth: 2.2 },
         productMainImage: {
@@ -167,27 +167,27 @@ export const products: Product[] = [
             {
                 id: 'b1',
                 src: '/TGSX-8003-walnoot-wood-1.jpg',
-                name: 'Akupanel | 60 – Klassiek Wood (Walnoot)',
+                name: 'Akupanel | 300 –  (Walnoot)',
             },
             {
                 id: 'b2',
                 src: '/TGSX-8019-geel-eiken-1.jpg',
-                name: 'Akupanel | 60 – Klassiek Eiken (Geel)',
+                name: 'Akupanel | 300 – (Geel)',
             },
             {
                 id: 'b3',
                 src: '/TGSX-8013-wit-eiken-1.jpg',
-                name: 'Akupanel | 60 – Klassiek Eiken (Wit)',
+                name: 'Akupanel | 300 – (Wit)',
             },
             {
                 id: 'b4',
                 src: '/TGSX-8005-zilver-1.jpg',
-                name: 'Akupanel | 60 – Klassiek Eiken (Zilver)',
+                name: 'Akupanel | 300 – (Zilver)',
             },
             {
                 id: 'b5',
                 src: '/TGSX-8010-zwart.jpg',
-                name: 'Akupanel | 60 – Klassiek Eiken (Zwart)',
+                name: 'Akupanel | 300 – (Zwart)',
             },
         ],
         description: {
