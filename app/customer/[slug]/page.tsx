@@ -1,12 +1,10 @@
-import { Box, Container, Grid, Stack, Typography } from '@mui/material';
-import Footer from '../../component/footer/footer';
-import Navbar from '../../component/navbar';
-import StaticHeader from '../../component/header/staticHeader';
+import { Container, Stack, Typography } from '@mui/material';
+
 import { constants } from '../constants';
 import { FaqCollapse } from '@/app/component/customer/faqCollapse';
 import MontagePage from '../../component/customer/montage';
 
-export const getData = async (slug: string) => {
+const getData = async (slug: string) => {
     const res = await constants.find((menuItem) => menuItem.id === slug);
 
     if (!res) {
