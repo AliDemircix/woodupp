@@ -22,7 +22,7 @@ export const klantenService = {
     title: 'Klantenservice',
     links: [
         { title: 'Contact', link: '/contact' },
-        { title: 'Installatie instructies', link: '/customer/montage' },
-        { title: 'FAQ', link: '/customer/vaakgestelde-vragen-en-antworden' },
+        { title: 'Installatie instructies', link: '/montage' },
+        { title: 'FAQ', link: '/vaakgestelde-vragen-en-antworden' },
     ],
 };

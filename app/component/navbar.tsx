@@ -645,14 +645,14 @@ const options = [
             },
             {
                 name: 'Montage',
-                link: 'customer/montage',
+                link: 'montage',
                 id: 13,
                 img: '/montage.png',
                 text: '',
             },
             {
                 name: 'Vaakgestelde vragen en antwoorden',
-                link: 'customer/vaakgestelde-vragen-en-antworden',
+                link: 'vaakgestelde-vragen-en-antworden',
                 id: 14,
                 img: '/FAQ.png',
                 text: '',

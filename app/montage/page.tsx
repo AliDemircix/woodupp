@@ -3,7 +3,7 @@ import { Typography, List, ListItem, ListItemText, Grid } from '@mui/material';
 
 function MontagePage() {
     return (
-        <Grid container flexDirection={'column'} justifyContent="center">
+        <Grid container flexDirection={'column'} justifyContent="center" mt={4} ml={3}>
             <Typography variant="h5" gutterBottom>
                 Instructies voor montage met de KIT
             </Typography>
