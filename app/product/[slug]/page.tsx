@@ -5,7 +5,7 @@ import ProductDetailCard from '../../component/productDetail/ProductDetailCard';
 import ProductDetailColorCard from '../../component/productDetail/ProductDetailColorCard';
 import ProductInfoSection from '../../component/productDetail/ProductInfoSection';
 
-export async function getData(slug: string): Promise<Product> {
+async function getData(slug: string): Promise<Product> {
     const res = await products.find((product) => product.code === slug);
 
     if (!res) {
