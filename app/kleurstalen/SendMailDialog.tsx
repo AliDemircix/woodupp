@@ -9,8 +9,8 @@ export interface SimpleDialogProps {
 }
 
 interface FormData {
-    firstName: string;
-    lastName: string;
+    name: string;
+    address: string;
     email: string;
     message: string;
     kleurstalen: string;
@@ -20,8 +20,8 @@ export default function SendMailDialog(props: SimpleDialogProps) {
     const { onClose, open, selectedProductNames } = props;
 
     const [formData, setFormData] = useState<FormData>({
-        firstName: '',
-        lastName: '',
+        name: '',
+        address: '',
         email: '',
         message: '',
         kleurstalen: '',
@@ -87,10 +87,10 @@ export default function SendMailDialog(props: SimpleDialogProps) {
                         ))}
                     </Grid>
                     <Grid mb={2}>
-                        <TextField id="firstName" name="firstName" label="First Name" variant="outlined" onChange={handleInputChange} fullWidth />
+                        <TextField id="name" name="name" label="Name" variant="outlined" onChange={handleInputChange} fullWidth />
                     </Grid>
                     <Grid mb={2}>
-                        <TextField id="lastName" name="lastName" label="Last Name" variant="outlined" onChange={handleInputChange} fullWidth />
+                        <TextField id="address" name="address" label="Address" variant="outlined" onChange={handleInputChange} fullWidth />
                     </Grid>
                     <Grid mb={2}>
                         <TextField id="email" name="email" label="Email" variant="outlined" onChange={handleInputChange} fullWidth />
