@@ -18,7 +18,7 @@ interface FormData {
 
 export default function SendMailDialog(props: SimpleDialogProps) {
     const { onClose, open, selectedProductNames } = props;
-
+    console.log('test');
     const [formData, setFormData] = useState<FormData>({
         name: '',
         address: '',
