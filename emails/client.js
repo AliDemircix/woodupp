@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+import { email } from '../app/lib/contact-info/constants';
 
 const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
 const adminEmailFull = process.env.NEXT_PUBLIC_ADMIN_EMAIL_FULL;
@@ -17,5 +18,5 @@ export const transporter = nodemailer.createTransport({
 
 export const mailOptions = {
     from: adminEmailFull,
-    to: adminEmailFull,
+    to: email,
 };

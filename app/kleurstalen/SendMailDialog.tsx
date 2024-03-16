@@ -1,18 +1,16 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState, useEffect } from 'react';
 import Dialog from '@mui/material/Dialog';
 import { Button, TextField, Typography, Grid } from '@mui/material';
 
-const emails = ['username@gmail.com', 'user02@gmail.com'];
-
 export interface SimpleDialogProps {
     open: boolean;
-    onClose: (value: string) => void;
+    onClose: () => void;
     selectedProductNames: Array<string>;
 }
 
 interface FormData {
-    firstName: string;
-    lastName: string;
+    name: string;
+    address: string;
     email: string;
     message: string;
     kleurstalen: string;
@@ -20,15 +18,24 @@ interface FormData {
 
 export default function SendMailDialog(props: SimpleDialogProps) {
     const { onClose, open, selectedProductNames } = props;
+    console.log('test');
     const [formData, setFormData] = useState<FormData>({
-        firstName: '',
-        lastName: '',
+        name: '',
+        address: '',
         email: '',
         message: '',
-        kleurstalen: selectedProductNames.join(', '),
+        kleurstalen: '',
     });
 
     const [submitting, setSubmitting] = useState<boolean>(false);
+
+    useEffect(() => {
+        const productNames = selectedProductNames.join(', ');
+        setFormData((prevState) => ({
+            ...prevState,
+            kleurstalen: productNames,
+        }));
+    }, [selectedProductNames]);
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -60,7 +67,7 @@ export default function SendMailDialog(props: SimpleDialogProps) {
         } else if (error) {
             alert('Er is iets misgegaan, probeer het later opnieuw.');
         }
-
+        onClose();
         setSubmitting(false);
     };
 
@@ -80,10 +87,10 @@ export default function SendMailDialog(props: SimpleDialogProps) {
                         ))}
                     </Grid>
                     <Grid mb={2}>
-                        <TextField id="firstName" name="firstName" label="First Name" variant="outlined" onChange={handleInputChange} fullWidth />
+                        <TextField id="name" name="name" label="Name" variant="outlined" onChange={handleInputChange} fullWidth />
                     </Grid>
                     <Grid mb={2}>
-                        <TextField id="lastName" name="lastName" label="Last Name" variant="outlined" onChange={handleInputChange} fullWidth />
+                        <TextField id="address" name="address" label="Address" variant="outlined" onChange={handleInputChange} fullWidth />
                     </Grid>
                     <Grid mb={2}>
                         <TextField id="email" name="email" label="Email" variant="outlined" onChange={handleInputChange} fullWidth />
